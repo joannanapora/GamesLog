@@ -25,6 +25,7 @@ import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import mainLogo from'../gl.png';
 import { Box } from '@material-ui/core';
+import GameCardList from './GameCardList';
 
 const drawerWidth = window.innerWidth > 414 ? 220 : window.innerWidth;
 
@@ -131,6 +132,7 @@ const MainContainer = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [currentPage,setCurrentPage] = React.useState(0)
   const themeMaterial = useTheme();
 
   const handleDrawerOpen = () => {
@@ -140,6 +142,10 @@ const MainContainer = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const listOfComponents = [<GameCardList/>]
+
+
 
   return (
     <div className={classes.root}>
@@ -200,8 +206,8 @@ const MainContainer = () => {
         </div>
         <Divider />
         <List   >
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          {['Games', 'My log', 'Friends', 'Profile'].map((text, index) => (
+            <ListItem onClick={()=>setCurrentPage(index)} button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -223,7 +229,7 @@ const MainContainer = () => {
       </Drawer>
       <main className={classes.content}>
          <div className={classes.toolbar} />
-         
+       {listOfComponents[currentPage]}
       </main>
     </div>
   );
