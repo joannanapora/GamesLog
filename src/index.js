@@ -6,12 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from "./components/ThemeProvider";
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider>
     <App />
   </ThemeProvider>,
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );

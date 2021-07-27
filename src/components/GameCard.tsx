@@ -9,10 +9,10 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
-import nintendo from "../assets/games/nintendo.png"
 import { Typography } from '@material-ui/core';
-
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import Modal from "./Modal";
+import {cardColor} from "./Data";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,26 +25,24 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
          transform: 'scale(1.03)'
     },
-},
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    info: {
-        minHeight: 120,
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-    },
+  },
+  rootPlayed: {
+    minWidth: 300,
+    maxWidth: 300,
+    background: `${cardColor}`,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  info: {
+    minHeight: 120,
+  },
+  ava: {
+    backgroundColor: '#ff3d47'
+  },
+  avatar:{
+  },
     rating: {
         width: 200,
         display: 'flex',
@@ -54,40 +52,50 @@ const useStyles = makeStyles((theme: Theme) =>
         "&:hover": {
             color: '#ff3d47'
           }
-    }
+    },
+    fullheart: {
+      color: '#ff3d47',
+      "&:hover": {
+        backgroundColor: 'transparent',
+      },
+  }
   }),
 );
 
-const GameCard = ({name, rate, image, platforms, info}: {name:string, rate: number, image: any, platforms: any, info: string }) => {
+const GameCard = ({popularity, played, name, rate, image, platforms, info}: {popularity: number,played: boolean, name:string, rate: number, image: any, platforms: any, info: string }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState<number | null>(0);
-  const [hover, setHover] = React.useState(-1);
+  const [open, setOpen] = React.useState(false);
 
-  const labels: { [index: string]: string } = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
+  const handleClickOpen = (name:string) => {
+    setOpen(true);
+    addToGamesLog(name)
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const addToGamesLog = (name:string) => {
+  console.log('added ' + name)
+  }
 
   return (
-    <Card className={classes.root}>
+    <Card  className={ !played? classes.root : classes.rootPlayed}>
+          {open && 
+          <Modal open={open}
+    handleClickOpen={handleClickOpen}
+    handleClose={handleClose}
+    />}
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar className={!played ? classes.avatar : classes.ava} aria-label="recipe">
             {rate}
           </Avatar>
         }
         action={
-            <IconButton className={classes.heart} aria-label="add to favorites">
-            <FavoriteIcon />
+          played ? null :
+            <IconButton  onClick={()=> !played? handleClickOpen(name) : null } className={played ? classes.fullheart : classes.heart} aria-label="add to games log">
+            <LibraryAddIcon/>
            </IconButton>
         }
         title={name}
@@ -100,26 +108,21 @@ const GameCard = ({name, rate, image, platforms, info}: {name:string, rate: numb
       <div className={classes.rating}>
       <Rating
       size="large"
-        name="hover-feedback"
-        value={value}
-        precision={0.1}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
+      readOnly 
+        name="feedback"
+        value={rate}
+        precision={0.5}
       />
-      {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+      ({popularity})
     </div>
         <Typography className={classes.info} variant="body2" color="textSecondary" component="p">
          {info}
         </Typography>
       </CardContent>
       <CardActions>
-        {platforms.map((el:any)=>{
+        {platforms.map((el:any,i:number)=>{
             return (
-                <img height='35px' width='35px' src={el} alt=''></img>
+                <img key={i} height='20px' width='20px' src={el} alt=''/>
             )
         })}
       </CardActions>
@@ -128,3 +131,4 @@ const GameCard = ({name, rate, image, platforms, info}: {name:string, rate: numb
 }
 
 export default GameCard;
+

@@ -156,9 +156,9 @@ const MainContainer = () => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{backgroundColor: `${ theme === 'light' ? '#FFF099' : '#EB5254'}`}} className={classes.toolbar} >
+        <Toolbar style={{backgroundColor:'#FFF099'}} className={classes.toolbar} >
           <IconButton
-            style={{color: `${ theme === 'light' ? 'black' : 'white'}` }}
+            style={{color:'black'}}
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -199,7 +199,7 @@ const MainContainer = () => {
           }),
         }}
       >
-        <div  style={{backgroundColor: `${ theme === 'light' ? '#FFF099' : '#EB5254'}`}} className={classes.toolbar}>
+        <div  style={{backgroundColor: '#FFF099'}} className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
             {themeMaterial.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>

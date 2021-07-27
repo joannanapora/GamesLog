@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import mainLogo from'../gl.png';
 import {withRouter} from 'react-router-dom';
+import GLButton from './GLButton';
 
 const LandingPage = ({history}:any) => {
 
@@ -44,13 +45,18 @@ const LandingPage = ({history}:any) => {
         borderRadius: '50%',
         fontSize: '25px',
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        background: 'linear-gradient(to right bottom, #FFF099, #EB5254)',
         backgroundColor: 'green',
         justifyContent: 'center',
         alignContent: 'center',
         display: 'flex',
         alignItems: 'center',
         fontWeight: 'bold',
+        fontFamily: 'Cuprum',
+        "&:hover": {
+          background: 'linear-gradient(to left bottom, #FFF099, #EB5254)',
+     },
+
       },
       title: {
         display: 'flex',
@@ -73,7 +79,7 @@ const LandingPage = ({history}:any) => {
 
   const classes = useStyles();
 
-  const Instructions = ["Create your own, personal game list", "Rate and recommend games you've played", "Check games your friends play"]
+  const Instructions = ["create your personal game list", "rate and recommend games you've played", "check out games your friends play"]
 
   return (
     <div className={classes.root}>
@@ -85,7 +91,7 @@ const LandingPage = ({history}:any) => {
           </Grid>
         )}
       </Grid>
-      <Button onClick={()=>history.push('/')} className={classes.button} >LET'S START</Button>
+      <GLButton label={"Let's start!"} onClick={()=>history.push('/')}/>
     </div>
   );
 }
