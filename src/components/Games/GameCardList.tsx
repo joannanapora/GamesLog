@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {Games} from "./Data";
+import {Games} from "../Data";
 import GameCard from './GameCard';
 import Filters from './Filters';
-import Modal from "./Modal";
+import Modal from "../Modal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,11 +13,16 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'row',
       [theme.breakpoints.down('xs')]: {
         flexDirection: 'column',
-
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center'
       },
     },
     grid: {
       flexGrow: 1,
+      [theme.breakpoints.down('sm')]: {
+        display: 'flow-root',
+      },
     },
     paper: {
       height: 140,
@@ -45,7 +50,7 @@ const GameCardList = () => {
                 data.map((card,i)=>{
                     return (
             <Grid key={i} item>
-              <GameCard popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
+              <GameCard wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
             </Grid>
                     )
                 })

@@ -25,7 +25,8 @@ import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import mainLogo from'../gl.png';
 import { Box } from '@material-ui/core';
-import GameCardList from './GameCardList';
+import GameCardList from './Games/GameCardList';
+import MyLog from './MyGames/exam';
 
 const drawerWidth = window.innerWidth > 414 ? 220 : window.innerWidth;
 
@@ -88,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
   search: {
     position: 'relative',
@@ -143,8 +144,7 @@ const MainContainer = () => {
     setOpen(false);
   };
 
-  const listOfComponents = [<GameCardList/>]
-
+  const listOfComponents = [<GameCardList/>,<MyLog/>];
 
 
   return (
@@ -206,7 +206,7 @@ const MainContainer = () => {
         </div>
         <Divider />
         <List   >
-          {['Games', 'My log', 'Friends', 'Profile'].map((text, index) => (
+          {['All Games', 'My Games', 'Friends', 'Profile'].map((text, index) => (
             <ListItem onClick={()=>setCurrentPage(index)} button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />

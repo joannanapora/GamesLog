@@ -7,12 +7,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import Rating from '@material-ui/lab/Rating';
 import { Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-import Modal from "./Modal";
-import {cardColor} from "./Data";
+import Modal from "../Modal";
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import CachedIcon from '@material-ui/icons/Cached';
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,17 +28,15 @@ const useStyles = makeStyles((theme: Theme) =>
          transform: 'scale(1.03)'
     },
   },
-  rootPlayed: {
-    minWidth: 300,
-    maxWidth: 300,
-    background: `${cardColor}`,
-  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
   info: {
     minHeight: 120,
+  },
+  header: {
+    fontWeight: 500
   },
   ava: {
     backgroundColor: '#ff3d47'
@@ -60,9 +60,10 @@ const useStyles = makeStyles((theme: Theme) =>
       },
   }
   }),
+  
 );
 
-const GameCard = ({popularity, played, name, rate, image, platforms, info}: {popularity: number,played: boolean, name:string, rate: number, image: any, platforms: any, info: string }) => {
+const GameCard = ({wanttoplay, inprogress, popularity, played, name, rate, image, platforms, info}: {wanttoplay: boolean, inprogress: boolean, popularity: number,played: boolean, name:string, rate: number, image: any, platforms: any, info: string }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -76,11 +77,70 @@ const GameCard = ({popularity, played, name, rate, image, platforms, info}: {pop
   };
 
   const addToGamesLog = (name:string) => {
-  console.log('added ' + name)
+  }
+
+  const showAction = (inprogress:boolean, played:boolean, wantoplay:boolean) => {
+    
+    if ( played ) {
+      return (
+        <IconButton className={classes.fullheart} aria-label="add to games log">
+     <CheckIcon/>
+  </IconButton>
+)
+    }
+    
+    if (!played && !wantoplay && !inprogress )  {
+      return (
+        <IconButton  onClick={()=> !played? handleClickOpen(name) : null } className={classes.heart} aria-label="add to games log">
+         <LibraryAddIcon/>
+      </IconButton>
+      )
+    }
+    if ( inprogress )
+    return (
+            <IconButton  aria-label="add to games log">
+         <HourglassEmptyIcon/>
+      </IconButton>
+    )
+
+    if ( wantoplay ) {
+      return (
+        <IconButton aria-label="add to games log">
+     <VisibilityIcon/>
+  </IconButton>
+)
+    }
+    
+  }
+
+  const cardBackground = (inprogress:boolean, played:boolean, wantoplay:boolean) => {
+    if ( played ) {
+      return (
+        'rgb(255, 240, 153)'
+)
+    }
+    
+    if (!played && !wantoplay && !inprogress )  {
+      return (
+        '#FAFAFA'
+      )
+    }
+    if ( inprogress )
+    return (
+      'rgb(255, 255, 208)'
+    )
+
+    if ( wantoplay ) {
+      return (
+        'rgb(255, 255, 208)'
+)
+    }
   }
 
   return (
-    <Card  className={ !played? classes.root : classes.rootPlayed}>
+    <Card style={{backgroundColor: cardBackground(inprogress, played, wanttoplay)}}  
+    className={classes.root}
+    >
           {open && 
           <Modal open={open}
     handleClickOpen={handleClickOpen}
@@ -93,10 +153,7 @@ const GameCard = ({popularity, played, name, rate, image, platforms, info}: {pop
           </Avatar>
         }
         action={
-          played ? null :
-            <IconButton  onClick={()=> !played? handleClickOpen(name) : null } className={played ? classes.fullheart : classes.heart} aria-label="add to games log">
-            <LibraryAddIcon/>
-           </IconButton>
+          showAction(inprogress, played, wanttoplay)
         }
         title={name}
       />

@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
-import GLButton from './GLButton';
+import GLButton from "../Buttons/GLButton";
 import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
 
@@ -63,14 +63,15 @@ function valuetext(value: number) {
     return `${value}`;
 }
 
-const Filters = () => {
+const MyFilters = () => {
     const classes = useStyles();
     const [platform, setPlatform] = React.useState({
         nintendo: false,
         ps: false,
         xbox: false,
         win: false,
-        mac: false
+        mac: false,
+        stadia: false,
     });
     
     const [genre, setGenre] = React.useState({
@@ -78,7 +79,8 @@ const Filters = () => {
         sport: false,
         tb: false,
         owrac: false,
-        acad: false
+        acad: false,
+        rp: false
     });
     
     const [value, setValue] = React.useState<number[]>([1, 5]);
@@ -98,7 +100,6 @@ const Filters = () => {
 
 
   const handleSearch = () => {
-      console.log('search')
   }
 
   const handleFilters = () => {
@@ -178,6 +179,10 @@ const Filters = () => {
             control={<Checkbox className={classes.checked}  checked={platform.nintendo} onChange={handlePlatformChange} name="nintendo" />}
             label="Nintendo"
           />
+              <FormControlLabel
+           control={<Checkbox className={classes.checked}  checked={platform.stadia} onChange={handlePlatformChange} name="stadia" />}
+           label="Stadia"
+         />
           <FormControlLabel
             control={<Checkbox className={classes.checked}  checked={platform.ps} onChange={handlePlatformChange} name="ps" />}
             label="PlayStation"
@@ -207,6 +212,10 @@ const Filters = () => {
             control={<Checkbox className={classes.checked}  checked={genre.ssim} onChange={handleGenreChange} name="ssim" />}
             label="Social simulation"
           />
+               <FormControlLabel
+           control={<Checkbox className={classes.checked}  checked={genre.rp} onChange={handleGenreChange} name="rp" />}
+           label="Role-playing"
+         />
           <FormControlLabel
             control={<Checkbox className={classes.checked}  checked={genre.sport} onChange={handleGenreChange} name="sport" />}
             label="Sport"
@@ -239,4 +248,4 @@ const Filters = () => {
 }
 
 
-export default Filters;
+export default MyFilters;

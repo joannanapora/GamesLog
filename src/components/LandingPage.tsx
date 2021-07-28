@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import mainLogo from'../gl.png';
 import {withRouter} from 'react-router-dom';
-import GLButton from './GLButton';
+import GLButton from "../components/Buttons/GLButton";
 
 const LandingPage = ({history}:any) => {
 
