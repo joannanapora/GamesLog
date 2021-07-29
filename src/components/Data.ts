@@ -23,7 +23,12 @@ export const Games = [
         played: true,
         popularity: 342,
         wanttoplay:false,
-        inprogress: false
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: false,
+        status: "PLAYED",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: false,
     },
     {
         id: '2',
@@ -35,7 +40,12 @@ export const Games = [
         played: true,
         popularity: 213,
         wanttoplay:false,
-        inprogress: false
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: false,
+        status: "PLAYED",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: false,
     },
     {
         id: '3',
@@ -47,7 +57,12 @@ export const Games = [
         played: false,
         popularity: 436,
         wanttoplay:true,
-        inprogress: false
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: false,
+        status: "WANT TO PLAY",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: false,
     },
     {
         id: '4',
@@ -59,7 +74,12 @@ export const Games = [
         played: false,
         popularity: 132,
         wanttoplay:false,
-        inprogress: false
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: false,
+        status: "NONE",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: false,
     },
     {
         id: '5',
@@ -71,7 +91,12 @@ export const Games = [
         played: false,
         popularity: 1932,
         wanttoplay:false,
-        inprogress: true
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: true,
+        status: "PLAYING NOW",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: true,
     },
     {
         id: '6',
@@ -83,7 +108,12 @@ export const Games = [
         played: false,
         popularity: 82,
         wanttoplay:false,
-        inprogress: true
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: true,
+        status: "PLAYING NOW",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: true,
     },
     {
         id: '7',
@@ -95,7 +125,12 @@ export const Games = [
         played: true,
         popularity: 562,
         wanttoplay:false,
-        inprogress: false
+        from: "12-04-2020",
+        to: "06-03-2021",
+        inprogress: false,
+        status: "PLAYED",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: false,
     },
     {
         id: '8',
@@ -107,7 +142,12 @@ export const Games = [
         popularity: 3462,
         played: true,
         wanttoplay:false,
+        from: "12-04-2020",
+        to: "06-03-2021",
         inprogress: false,
+        status: "PLAYED",
+        platformFinished: ['Nintendo', 'xBox'],
+        recommandToOthers: true,
     },
     {
       id: '9',
@@ -119,7 +159,12 @@ export const Games = [
       popularity: 399,
       played: false,
       wanttoplay:false,
-      inprogress: false
+      from: "12-04-2020",
+      to: "06-03-2021",
+      inprogress: false,
+      status: "NONE",
+      platformFinished: ['Nintendo', 'xBox'],
+      recommandToOthers: false,
   },
 ]
 
@@ -144,7 +189,7 @@ export const statusList: IStatus[] = [
       label: "Finished"
     },
     {
-      name: "inprogress",
+     name: "inprogress",
       label: "In progress"
     },
     {

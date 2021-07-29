@@ -50,12 +50,16 @@ flexDirection: 'column',
       formSort: {
         width: '100%',
       },
+      showhide: {
+        margin: 20
+      },
     checked: {
         color: '#EB5254',
         "&$checked": {
             color: '#EB5254'
           }
-    }},
+    }
+  },
     ),
 );
 
@@ -166,8 +170,6 @@ const Filters = () => {
   })(TextField);
 
 
-  const test = 'played';
-
 
   return (
     <div className={classes.root}>
@@ -178,27 +180,12 @@ const Filters = () => {
         id="custom-css-outlined-input"
       />
            {window.innerWidth < 600 ?
-<GLButton onClick={handleFilters} label={!filtersOn ? 'show filters' : 'hide filters'} />
+<div className={classes.showhide} onClick={handleFilters}>{!filtersOn ? 'Show more filters' : 'Hide filters'}</div>
 : null
            }
             {filtersOn && 
     <Zoom in={filtersOn}>
           <Paper elevation={4} className={classes.paper}>
-          <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Status</FormLabel>
-        <FormGroup className={classes.labels} >
-          {
-            statusList.map((el,i)=>{
-              return (
-                <FormControlLabel
-                control={<Checkbox className={classes.checked}  checked={status[el.name]} onChange={handleStatusChange} name={el.name} />}
-                label={el.label}
-              />
-              )
-            })
-          }
-        </FormGroup>
-      </FormControl>
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Platform</FormLabel>
         <FormGroup className={classes.labels} >

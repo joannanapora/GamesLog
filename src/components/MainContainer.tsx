@@ -26,7 +26,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import mainLogo from'../gl.png';
 import { Box } from '@material-ui/core';
 import GameCardList from './Games/GameCardList';
-import MyLog from './MyGames/exam';
+import MyLog from './MyGames/MyGamesTabs';
 
 const drawerWidth = window.innerWidth > 414 ? 220 : window.innerWidth;
 
@@ -83,13 +83,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(2),
+
   },
   search: {
     position: 'relative',
@@ -144,7 +142,7 @@ const MainContainer = () => {
     setOpen(false);
   };
 
-  const listOfComponents = [<GameCardList/>,<MyLog/>];
+  const listOfComponents = [<GameCardList/>,<MyLog />];
 
 
   return (

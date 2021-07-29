@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const GameCardList = () => {
   const classes = useStyles();
   const data = Games;
-
-
+ 
 
   return (
     <div className={classes.root} >
