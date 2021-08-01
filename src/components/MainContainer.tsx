@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
 const MainContainer = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
   const [currentPage,setCurrentPage] = React.useState(0)
   const themeMaterial = useTheme();
 
@@ -144,7 +144,6 @@ const MainContainer = () => {
 
   const listOfComponents = [<GameCardList/>,<MyLog />];
 
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -154,7 +153,7 @@ const MainContainer = () => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{backgroundColor:'#FFF099'}} className={classes.toolbar} >
+        <Toolbar  className={classes.toolbar} >
           <IconButton
             style={{color:'black'}}
             aria-label="open drawer"
@@ -169,7 +168,7 @@ const MainContainer = () => {
           <Typography variant="h6" noWrap>
           <img height='100px' src={mainLogo} alt='' ></img>
           </Typography>
-          <div style={{color: `${ theme === 'light' ? 'black' : 'white'}` }} className={classes.search}>
+          <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>

@@ -11,10 +11,11 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Rating from '@material-ui/lab/Rating';
 import { Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-import Modal from "../Modal";
+import Modal from '../Modal';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import CachedIcon from '@material-ui/icons/Cached';
 import CheckIcon from '@material-ui/icons/Check';
+import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,168 +25,192 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create(['transform'], {
         duration: theme.transitions.duration.standard,
       }),
-      "&:hover": {
-         transform: 'scale(1.03)'
-    },
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  info: {
-    minHeight: 120,
-  },
-  header: {
-    fontWeight: 500
-  },
-  ava: {
-    backgroundColor: '#ff3d47'
-  },
-  avatar:{
-  },
-    rating: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
+      '&:hover': {
+        transform: 'scale(1.03)',
       },
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9
+    },
+    info: {
+      minHeight: 120,
+    },
+    header: {
+      fontWeight: 500,
+    },
+    ava: {
+      backgroundColor: '#ff3d47',
+    },
+    avatar: {},
+    rating: {
+      width: 200,
+      display: 'flex',
+      alignItems: 'center',
+    },
     heart: {
-        "&:hover": {
-            color: '#ff3d47'
-          }
+      '&:hover': {
+        color: '#ff3d47',
+      },
     },
     fullheart: {
       color: '#ff3d47',
-      "&:hover": {
+      '&:hover': {
         backgroundColor: 'transparent',
       },
-  }
-  }),
-  
+    },
+  })
 );
 
-const GameCard = ({wanttoplay, inprogress, popularity, played, name, rate, image, platforms, info}: {wanttoplay: boolean, inprogress: boolean, popularity: number,played: boolean, name:string, rate: number, image: any, platforms: any, info: string }) => {
+const GameCard = ({
+  wanttoplay,
+  inprogress,
+  popularity,
+  played,
+  name,
+  rate,
+  image,
+  platforms,
+  info,
+}: {
+  wanttoplay: boolean;
+  inprogress: boolean;
+  popularity: number;
+  played: boolean;
+  name: string;
+  rate: number;
+  image: any;
+  platforms: any;
+  info: string;
+}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const themeMaterial = useTheme();
 
-  const handleClickOpen = (name:string) => {
+  const handleClickOpen = (name: string) => {
     setOpen(true);
-    addToGamesLog(name)
+    addToGamesLog(name);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const addToGamesLog = (name:string) => {
-  }
+  const addToGamesLog = (name: string) => {};
 
-  const showAction = (inprogress:boolean, played:boolean, wantoplay:boolean) => {
-    
-    if ( played ) {
+  const showAction = (
+    inprogress: boolean,
+    played: boolean,
+    wantoplay: boolean
+  ) => {
+    if (played) {
       return (
         <IconButton className={classes.fullheart} aria-label="add to games log">
-     <CheckIcon/>
-  </IconButton>
-)
+          <CheckIcon />
+        </IconButton>
+      );
     }
-    
-    if (!played && !wantoplay && !inprogress )  {
-      return (
-        <IconButton  onClick={()=> !played? handleClickOpen(name) : null } className={classes.heart} aria-label="add to games log">
-         <LibraryAddIcon/>
-      </IconButton>
-      )
-    }
-    if ( inprogress )
-    return (
-            <IconButton  aria-label="add to games log">
-         <HourglassEmptyIcon/>
-      </IconButton>
-    )
 
-    if ( wantoplay ) {
+    if (!played && !wantoplay && !inprogress) {
+      return (
+        <IconButton
+          onClick={() => (!played ? handleClickOpen(name) : null)}
+          className={classes.heart}
+          aria-label="add to games log"
+        >
+          <LibraryAddIcon />
+        </IconButton>
+      );
+    }
+    if (inprogress)
       return (
         <IconButton aria-label="add to games log">
-     <VisibilityIcon/>
-  </IconButton>
-)
-    }
-    
-  }
+          <HourglassEmptyIcon />
+        </IconButton>
+      );
 
-  const cardBackground = (inprogress:boolean, played:boolean, wantoplay:boolean) => {
-    if ( played ) {
+    if (wantoplay) {
       return (
-        'rgb(255, 240, 153)'
-)
+        <IconButton aria-label="add to games log">
+          <VisibilityIcon />
+        </IconButton>
+      );
     }
-    
-    if (!played && !wantoplay && !inprogress )  {
-      return (
-        '#FAFAFA'
-      )
-    }
-    if ( inprogress )
-    return (
-      'rgb(255, 255, 208)'
-    )
+  };
 
-    if ( wantoplay ) {
-      return (
-        'rgb(255, 255, 208)'
-)
+  const cardBackground = (
+    inprogress: boolean,
+    played: boolean,
+    wantoplay: boolean
+  ) => {
+    if (played) {
+      return themeMaterial.palette.primary[themeMaterial.palette.type];
     }
-  }
+
+    if (!played && !wantoplay && !inprogress) {
+      return '#FAFAFA';
+    }
+    if (inprogress) return themeMaterial.palette.secondary[themeMaterial.palette.type];;
+
+    if (wantoplay) {
+      return 'rgb(255, 255, 208)';
+    }
+  };
 
   return (
-    <Card style={{backgroundColor: cardBackground(inprogress, played, wanttoplay)}}  
-    className={classes.root}
+    <Card
+      style={{
+        backgroundColor: cardBackground(inprogress, played, wanttoplay),
+      }}
+      className={classes.root}
     >
-          {open && 
-          <Modal open={open}
-    handleClickOpen={handleClickOpen}
-    handleClose={handleClose}
-    />}
+      {open && (
+        <Modal
+          open={open}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
+      )}
       <CardHeader
         avatar={
-          <Avatar className={!played ? classes.avatar : classes.ava} aria-label="recipe">
+          <Avatar
+            className={!played ? classes.avatar : classes.ava}
+            aria-label="recipe"
+          >
             {rate}
           </Avatar>
         }
-        action={
-          showAction(inprogress, played, wanttoplay)
-        }
+        action={showAction(inprogress, played, wanttoplay)}
         title={name}
       />
-      <CardMedia
-        className={classes.media}
-        image={image}
-      />
+      <CardMedia className={classes.media} image={image} />
       <CardContent>
-      <div className={classes.rating}>
-      <Rating
-      size="large"
-      readOnly 
-        name="feedback"
-        value={rate}
-        precision={0.5}
-      />
-      ({popularity})
-    </div>
-        <Typography className={classes.info} variant="body2" color="textSecondary" component="p">
-         {info}
+        <div className={classes.rating}>
+          <Rating
+            size="large"
+            readOnly
+            name="feedback"
+            value={rate}
+            precision={0.5}
+          />
+          ({popularity})
+        </div>
+        <Typography
+          className={classes.info}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {info}
         </Typography>
       </CardContent>
       <CardActions>
-        {platforms.map((el:any,i:number)=>{
-            return (
-                <img key={i} height='20px' width='20px' src={el} alt=''/>
-            )
+        {platforms.map((el: any, i: number) => {
+          return <img key={i} height="20px" width="20px" src={el} alt="" />;
         })}
       </CardActions>
     </Card>
   );
-}
+};
 
 export default GameCard;
-

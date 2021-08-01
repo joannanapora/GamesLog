@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
-type Theme = "light" | "dark";
-type ThemeContext = { theme: Theme; toggleTheme: () => void };
+const isDark = (theme: string) => theme === 'dark';
+
+type Theme = 'light' | 'dark';
+type ThemeContext = { toggleTheme: () => void };
 
 export const ThemeContext = React.createContext<ThemeContext>(
   {} as ThemeContext
 );
 
 export const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>('light');
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme(isDark(theme) ? 'light' : 'dark');
   };
 
-  const color = theme === "light" ? "#333" : "#FFF";
-  const backgroundColor = theme === "light" ? "#FFF" : "#333";
+  const palletType = isDark(theme) ? 'dark' : 'light';
+  const mainPrimaryColor = isDark(theme) ? '#00072D' : '#0E6BA8';
+  const mainSecondaryColor = isDark(theme) ? '#F7C548' : '#F7C548';
 
-  document.body.style.color = color;
-  document.body.style.backgroundColor = backgroundColor;
+  const themeConfig = createTheme({
+    palette: {
+      type: palletType,
+      primary: {
+        main: mainPrimaryColor,
+      },
+      secondary: {
+        main: mainSecondaryColor,
+      },
+    },
+  });
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+    <ThemeContext.Provider value={{ toggleTheme }}>
+      <MuiThemeProvider theme={themeConfig}>{children}</MuiThemeProvider>
     </ThemeContext.Provider>
   );
 };
