@@ -18,18 +18,24 @@ export const ThemeProvider: React.FC = ({ children }) => {
   };
 
   const palletType = isDark(theme) ? 'dark' : 'light';
-  const mainPrimaryColor = isDark(theme) ? '#00072D' : '#0E6BA8';
-  const mainSecondaryColor = isDark(theme) ? '#F7C548' : '#F7C548';
+  const mainPrimary = isDark(theme) ? '#424242' : '#5E8B7E';
+  const lightPrimary = isDark(theme) ? '#616161' : '#A7C4BC';
+  const darkPrimary = isDark(theme) ? '#2196f3' : '#DFEEEA';
+  const mainSecondary = isDark(theme) ? '#757575' : '#FAFAFA';
+  const mainFunctions = isDark(theme) ? '#DFEEEA' : '#DFEEEA';
 
   const themeConfig = createTheme({
     palette: {
       type: palletType,
       primary: {
-        main: mainPrimaryColor,
+        main: mainPrimary,
+        light: lightPrimary,
+        dark: darkPrimary,
       },
-      secondary: {
-        main: mainSecondaryColor,
-      },
+      secondary:{
+        main: mainSecondary,
+        light: mainFunctions
+      } 
     },
   });
 

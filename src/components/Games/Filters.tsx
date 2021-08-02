@@ -10,7 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import GLButton from '../Buttons/GLButton';
 import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
-import { statusList, genreList, platformList } from '../Data';
+import { genreList, platformList } from '../Data';
+import { useTheme } from '@material-ui/core/styles';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '300px',
       display: 'flex',
       flexDirection: 'column',
+      margin: 30,
+      [theme.breakpoints.down('md')]: {
+        margin: 5,
+        padding: 5
+      },
+      [theme.breakpoints.down('xs')]: {
+        width:'80%',
+        margin: 10,
+        padding: 10
+      },
+    },
+    buttonCtn: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'center'
     },
     formControl: {
       margin: theme.spacing(1),
@@ -30,34 +48,38 @@ flexDirection: 'column',
     sliderBox: {
             width: '100%',
             padding: theme.spacing(1),
+            display: 'flex',
+            flexDirection: 'column',
     },
     slider:{
-        color: '#EB5254',
+        color: theme.palette.secondary.light,  
     },
     selectEmpty: {
         marginTop: theme.spacing(1),
         width: '115%',
-        borderBottom: '1px solid #EB5254 '
-        
       },
       paper: {
         zIndex: 1,
         position: 'relative',
         border: 'none',
-        boxShadow: 'none'
-
+        boxShadow: 'none',
+        background: 'none'
       },
       formSort: {
         width: '100%',
       },
       showhide: {
-        margin: 20
+        margin: 20,
+        color: theme.palette.secondary.contrastText,
+        cursor: 'pointer',
+        [theme.breakpoints.down('xs')]: {
+          margin: 10,
+        },
       },
     checked: {
-        color: '#EB5254',
+        color: theme.palette.secondary.light,
         "&$checked": {
-            color: '#EB5254'
-          }
+            color: theme.palette.secondary.light,          }
     }
   },
     ),
@@ -98,7 +120,7 @@ const Filters = () => {
     
     const [value, setValue] = React.useState<number[]>([1, 5]);
     const [filtersOn, setFiltersOn] = React.useState(true);
-    
+    const themeMaterial = useTheme();
   const handleSlider = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
@@ -109,10 +131,6 @@ const Filters = () => {
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGenre({ ...genre, [event.target.name]: event.target.checked });
-  };
-
-  const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStatus({ ...status, [event.target.name]: event.target.checked });
   };
 
 
@@ -150,20 +168,20 @@ const Filters = () => {
   const CssTextField = withStyles({
     root: {
       '& label.Mui-focused': {
-        color: '#EB5254',
+        color: themeMaterial.palette.secondary.light,    
       },
       '& .MuiInput-underline:after': {
-        borderBottomColor: '#EB5254',
+        borderBottomColor: themeMaterial.palette.secondary.light,    
       },
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          borderColor: '#EB5254',
+          borderColor: themeMaterial.palette.secondary.light,    
         },
         '&:hover fieldset': {
-          borderColor: '#EB5254',
+          borderColor: themeMaterial.palette.secondary.light,    
         },
         '&.Mui-focused fieldset': {
-          borderColor: '#EB5254',
+          borderColor: themeMaterial.palette.secondary.light,    
         },
       },
     },
@@ -179,10 +197,14 @@ const Filters = () => {
         variant="outlined"
         id="custom-css-outlined-input"
       />
-           {window.innerWidth < 600 ?
-<div className={classes.showhide} onClick={handleFilters}>{!filtersOn ? 'Show more filters' : 'Hide filters'}</div>
-: null
-           }
+       <Button
+       onClick={handleFilters}
+        variant="contained"
+        color="secondary"
+        startIcon={<FilterListIcon />}
+      >
+        {!filtersOn ? 'Show more filters' : 'Hide filters'}
+      </Button>
             {filtersOn && 
     <Zoom in={filtersOn}>
           <Paper elevation={4} className={classes.paper}>
@@ -228,8 +250,10 @@ const Filters = () => {
       getAriaValueText={valuetext}
       marks={marks}
       />
-          <GLButton onClick={handleSearch} label={'Search'} />
       </div>
+         <div className={classes.buttonCtn} >
+           <GLButton onClick={handleSearch} label={'Search'} />
+           </div> 
           </Paper>
         </Zoom>
     }

@@ -39,25 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       fontWeight: 500,
     },
-    ava: {
-      backgroundColor: '#ff3d47',
-    },
-    avatar: {},
     rating: {
       width: 200,
       display: 'flex',
       alignItems: 'center',
-    },
-    heart: {
-      '&:hover': {
-        color: '#ff3d47',
-      },
-    },
-    fullheart: {
-      color: '#ff3d47',
-      '&:hover': {
-        backgroundColor: 'transparent',
-      },
     },
   })
 );
@@ -105,7 +90,7 @@ const GameCard = ({
   ) => {
     if (played) {
       return (
-        <IconButton className={classes.fullheart} aria-label="add to games log">
+        <IconButton  aria-label="add to games log">
           <CheckIcon />
         </IconButton>
       );
@@ -115,9 +100,7 @@ const GameCard = ({
       return (
         <IconButton
           onClick={() => (!played ? handleClickOpen(name) : null)}
-          className={classes.heart}
-          aria-label="add to games log"
-        >
+          aria-label="add to games log">
           <LibraryAddIcon />
         </IconButton>
       );
@@ -144,16 +127,16 @@ const GameCard = ({
     wantoplay: boolean
   ) => {
     if (played) {
-      return themeMaterial.palette.primary[themeMaterial.palette.type];
+      return themeMaterial.palette.primary.main
     }
 
     if (!played && !wantoplay && !inprogress) {
-      return '#FAFAFA';
+      return themeMaterial.palette.secondary.main
     }
-    if (inprogress) return themeMaterial.palette.secondary[themeMaterial.palette.type];;
+    if (inprogress) return themeMaterial.palette.primary.light;
 
     if (wantoplay) {
-      return 'rgb(255, 255, 208)';
+      return themeMaterial.palette.primary.light;
     }
   };
 
@@ -174,7 +157,6 @@ const GameCard = ({
       <CardHeader
         avatar={
           <Avatar
-            className={!played ? classes.avatar : classes.ava}
             aria-label="recipe"
           >
             {rate}
@@ -198,7 +180,6 @@ const GameCard = ({
         <Typography
           className={classes.info}
           variant="body2"
-          color="textSecondary"
           component="p"
         >
           {info}

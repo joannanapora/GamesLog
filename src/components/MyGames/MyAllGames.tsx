@@ -9,18 +9,6 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 
-function renderPlatforms(params:any) {
-    console.log(params)
-  return (
-  <div>
-     {params.value.map((el: any,i: number)=>{
-            return (
-                <img key={i} height='20px' width='20px' src={el} alt=''/>
-            )
-        })}
-  </div>);
-}
-
 const renderEdit = (params:any) => {
     return (
       
@@ -44,7 +32,7 @@ if (params.row.recommandToOthers) {
 
 const InProgressList = () => {
   return (
-    <div style={{ height: '600px', width: '100%' }}>
+    <div style={{ height: '600px', width: '100%', padding: 30 }}>
       <DataGrid rows={rows} columns={columns} />
     </div>
   );

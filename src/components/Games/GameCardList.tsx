@@ -10,18 +10,30 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      margin: '0 12%',
       flexDirection: 'row',
+      [theme.breakpoints.down('md')]: {
+        margin: 0,
+        padding: 0,
+      },
       [theme.breakpoints.down('xs')]: {
         flexDirection: 'column',
         width: '100%',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: 0,
+        padding: 0,
       },
     },
     grid: {
       flexGrow: 1,
-      [theme.breakpoints.down('sm')]: {
+      padding: 30,
+      [theme.breakpoints.down('md')]: {
         display: 'flow-root',
+        padding: 30,
+      },
+      [theme.breakpoints.down('sm')]: {
+        padding: 10,
       },
     },
     paper: {
@@ -42,9 +54,9 @@ const GameCardList = () => {
   return (
     <div className={classes.root} >
 <Filters/>
-    <Grid container className={classes.grid} spacing={2}>
+    <Grid container className={classes.grid}>
       <Grid item xs={12}>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid style={{width: '100%'}} container spacing={1} justifyContent="center">
             {
                 data.map((card,i)=>{
                     return (
