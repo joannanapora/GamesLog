@@ -13,15 +13,15 @@ import { Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Modal from '../Modal';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import CachedIcon from '@material-ui/icons/Cached';
 import CheckIcon from '@material-ui/icons/Check';
 import { useTheme } from '@material-ui/core/styles';
+import { cardColor } from '../Data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      minWidth: 300,
-      maxWidth: 300,
+      minWidth: 290,
+      maxWidth: 290,
       transition: theme.transitions.create(['transform'], {
         duration: theme.transitions.duration.standard,
       }),
@@ -51,12 +51,12 @@ const GameCard = ({
   wanttoplay,
   inprogress,
   popularity,
-  played,
   name,
   rate,
   image,
   platforms,
   info,
+  status
 }: {
   wanttoplay: boolean;
   inprogress: boolean;
@@ -67,6 +67,7 @@ const GameCard = ({
   image: any;
   platforms: any;
   info: string;
+  status: string
 }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -83,67 +84,11 @@ const GameCard = ({
 
   const addToGamesLog = (name: string) => {};
 
-  const showAction = (
-    inprogress: boolean,
-    played: boolean,
-    wantoplay: boolean
-  ) => {
-    if (played) {
-      return (
-        <IconButton  aria-label="add to games log">
-          <CheckIcon />
-        </IconButton>
-      );
-    }
-
-    if (!played && !wantoplay && !inprogress) {
-      return (
-        <IconButton
-          onClick={() => (!played ? handleClickOpen(name) : null)}
-          aria-label="add to games log">
-          <LibraryAddIcon />
-        </IconButton>
-      );
-    }
-    if (inprogress)
-      return (
-        <IconButton aria-label="add to games log">
-          <HourglassEmptyIcon />
-        </IconButton>
-      );
-
-    if (wantoplay) {
-      return (
-        <IconButton aria-label="add to games log">
-          <VisibilityIcon />
-        </IconButton>
-      );
-    }
-  };
-
-  const cardBackground = (
-    inprogress: boolean,
-    played: boolean,
-    wantoplay: boolean
-  ) => {
-    if (played) {
-      return themeMaterial.palette.primary.main
-    }
-
-    if (!played && !wantoplay && !inprogress) {
-      return themeMaterial.palette.secondary.main
-    }
-    if (inprogress) return themeMaterial.palette.primary.light;
-
-    if (wantoplay) {
-      return themeMaterial.palette.primary.light;
-    }
-  };
 
   return (
     <Card
       style={{
-        backgroundColor: cardBackground(inprogress, played, wanttoplay),
+        backgroundColor: themeMaterial.palette.secondary.light,
       }}
       className={classes.root}
     >
@@ -162,7 +107,7 @@ const GameCard = ({
             {rate}
           </Avatar>
         }
-        action={showAction(inprogress, played, wanttoplay)}
+        action={status === 'none' ?   <LibraryAddIcon /> : null }
         title={name}
       />
       <CardMedia className={classes.media} image={image} />
@@ -185,7 +130,7 @@ const GameCard = ({
           {info}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions style={{backgroundColor: 'white', border: '2px solid #d8eaec'}} >
         {platforms.map((el: any, i: number) => {
           return <img key={i} height="20px" width="20px" src={el} alt="" />;
         })}

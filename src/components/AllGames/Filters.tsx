@@ -10,26 +10,24 @@ import TextField from '@material-ui/core/TextField';
 import GLButton from '../Buttons/GLButton';
 import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
-import { genreList, platformList } from '../Data';
+import { ratingList, genreList, platformList } from '../Data';
 import { useTheme } from '@material-ui/core/styles';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { Button } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        width: '300px',
+        width: '400px',
       display: 'flex',
       flexDirection: 'column',
-      margin: 30,
-      [theme.breakpoints.down('md')]: {
-        margin: 5,
-        padding: 5
-      },
+      margin: 10,
+      padding: 10,
       [theme.breakpoints.down('xs')]: {
-        width:'80%',
-        margin: 10,
-        padding: 10
+        borderRight: 'none',
+        width: '90%',
       },
     },
     buttonCtn: {
@@ -39,42 +37,33 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     formControl: {
       margin: theme.spacing(1),
+      borderBottom: '1px solid #DFEEEA',
+      width: '100%'
     },
     labels: {
 display: 'flex',
 flexDirection: 'column',
+    },
 
+    buttons:{ 
+      display: 'flex',
+      paddingBottom: '10px'
     },
-    sliderBox: {
-            width: '100%',
-            padding: theme.spacing(1),
-            display: 'flex',
-            flexDirection: 'column',
+    button: {
+      width: '100%',
+      fontSize: '0.6rem'
     },
-    slider:{
-        color: theme.palette.secondary.light,  
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(1),
-        width: '115%',
-      },
+
       paper: {
         zIndex: 1,
         position: 'relative',
         border: 'none',
         boxShadow: 'none',
-        background: 'none'
+        background: 'none',
+        width: '100%',
       },
       formSort: {
         width: '100%',
-      },
-      showhide: {
-        margin: 20,
-        color: theme.palette.secondary.contrastText,
-        cursor: 'pointer',
-        [theme.breakpoints.down('xs')]: {
-          margin: 10,
-        },
       },
     checked: {
         color: theme.palette.secondary.light,
@@ -85,10 +74,6 @@ flexDirection: 'column',
     ),
 );
 
-
-function valuetext(value: number) {
-    return `${value}`;
-}
 
 const Filters = () => {
     const classes = useStyles();
@@ -111,6 +96,15 @@ const Filters = () => {
         sv: false
     });
 
+
+    const [rating, setRating] = React.useState({
+     one: false,
+     two: false,
+     three: false,
+     four: false,
+     five: false,
+  });
+
     const [status, setStatus] = React.useState({
       played: false,
       inprogress: false,
@@ -118,12 +112,9 @@ const Filters = () => {
       neverplayed: false,
   });
     
-    const [value, setValue] = React.useState<number[]>([1, 5]);
     const [filtersOn, setFiltersOn] = React.useState(true);
     const themeMaterial = useTheme();
-  const handleSlider = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
+
 
   const handlePlatformChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlatform({ ...platform, [event.target.name]: event.target.checked });
@@ -131,6 +122,10 @@ const Filters = () => {
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGenre({ ...genre, [event.target.name]: event.target.checked });
+  };
+
+  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRating({ ...rating, [event.target.name]: event.target.checked });
   };
 
 
@@ -192,19 +187,30 @@ const Filters = () => {
   return (
     <div className={classes.root}>
                <CssTextField
-        className={classes.formControl}
         label="Search game"
         variant="outlined"
         id="custom-css-outlined-input"
       />
+      <div className={classes.buttons} >
        <Button
+       className={classes.button}
        onClick={handleFilters}
         variant="contained"
         color="secondary"
         startIcon={<FilterListIcon />}
       >
-        {!filtersOn ? 'Show more filters' : 'Hide filters'}
+        {!filtersOn ? 'Filters' : 'Hide filters'}
       </Button>
+      <Button
+       className={classes.button}
+       onClick={handleSearch}
+        variant="contained"
+        color="secondary"
+        startIcon={<SearchIcon />}
+      >
+      search
+      </Button>
+      </div>
             {filtersOn && 
     <Zoom in={filtersOn}>
           <Paper elevation={4} className={classes.paper}>
@@ -238,22 +244,21 @@ const Filters = () => {
           }
         </FormGroup>
       </FormControl>
-      <div className={classes.sliderBox}>
-      <FormLabel component="legend">Rate</FormLabel>
-      <Slider
-      className={classes.slider}
-      max={5}
-      min={1}
-      value={value}
-      onChange={handleSlider}
-      aria-labelledby="range-slider"
-      getAriaValueText={valuetext}
-      marks={marks}
-      />
-      </div>
-         <div className={classes.buttonCtn} >
-           <GLButton onClick={handleSearch} label={'Search'} />
-           </div> 
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Rating</FormLabel>
+        <FormGroup className={classes.labels} >
+        {
+            ratingList.map((el,i)=>{
+              return (
+                <FormControlLabel
+                control={<Checkbox className={classes.checked}  checked={rating[el.name]} onChange={handleRatingChange} name={el.name} />}
+                label={el.label}
+              />
+              )
+            })
+          }
+        </FormGroup>
+      </FormControl>
           </Paper>
         </Zoom>
     }

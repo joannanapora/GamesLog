@@ -1,8 +1,8 @@
 import {Switch, Route, withRouter} from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Nav from './components/Nav/Nav'
-import GameCardList from './components/Games/GameCardList';
-import MyLog from './components/MyGames/MyAllGames';
+import GameCardList from './components/AllGames/GameCardList';
+import MyGames from "./components/MyGamesLog/MyGames";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
     <Switch>
     <Route exact path='/allgames' component={GameCardList} />
     <Route exact path='/' component={LandingPage} />
-    <Route exact path='/mygames' component={MyLog} />
+    <Route exact path='/mygames' component={MyGames} />
 </Switch>
 </div>
   );

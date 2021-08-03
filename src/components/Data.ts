@@ -26,7 +26,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "PLAYED",
+        status: "played",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
     },
@@ -34,7 +34,7 @@ export const Games = [
         id: '2',
         name: 'Rocket League',
         rate: 5,
-        shortInfo: 'Rocket League is a vehicular soccer video game developed and published by Psyonix. The game was first released for Microsoft Windows and PlayStation 4 in July 2015, with ports for Xbox One and Nintendo Switch being released later on.',
+        shortInfo: 'Rocket League is a vehicular soccer video game developed and published by Psyonix. The game was first released for Microsoft Windows and PlayStation in 2015, with ports for Xbox and Nintendo being released later on.',
         jpg: rocketLeague,
         platforms : [nintendo, xbox,ps,win],
         played: true,
@@ -43,7 +43,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "PLAYED",
+        status: "played",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
     },
@@ -60,7 +60,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "WANT TO PLAY",
+        status: "wanna play",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
     },
@@ -77,7 +77,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "NONE",
+        status: "none",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
     },
@@ -94,7 +94,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: true,
-        status: "PLAYING NOW",
+        status: "now playing",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: true,
     },
@@ -111,7 +111,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: true,
-        status: "PLAYING NOW",
+        status: "now playing",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: true,
     },
@@ -128,7 +128,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "PLAYED",
+        status: "played",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
     },
@@ -145,7 +145,7 @@ export const Games = [
         from: "12-04-2020",
         to: "06-03-2021",
         inprogress: false,
-        status: "PLAYED",
+        status: "played",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: true,
     },
@@ -162,8 +162,8 @@ export const Games = [
       from: "12-04-2020",
       to: "06-03-2021",
       inprogress: false,
-      status: "NONE",
-      platformFinished: ['Nintendo', 'xBox'],
+      status: "none",
+      platformFinished: ['Nintendo', 'xBox', 'PlayStation', 'Stadia'],
       recommandToOthers: false,
   },
 ]
@@ -180,6 +180,11 @@ interface IPlatform {
 
 interface IGenre {
   name: 'acad' | 'owrac' | 'rp' | 'sport' | 'ssim' | 'sv' | 'tb' ;
+  label: string;
+}
+
+interface IRating {
+  name: 'one' | 'two' | 'three' | 'four' | 'five';
   label: string;
 }
 
@@ -260,6 +265,29 @@ export const statusList: IStatus[] = [
     },
   ]
 
+  export const ratingList : IRating[] = [
+
+    {
+      name: "five",
+      label: "5"
+    },
+    {
+      name: "four",
+      label: "4 or more"
+    },
+    {
+      name: "three",
+      label: "3 or more"
+    },
+    {
+      name: "two",
+      label: "2 or more"
+    },
+    {
+      name: "one",
+      label: "1 or more"
+    },
+  ]
 
 
 export const customColor = 'linear-gradient(to right bottom, #FFF099, #EB5254)';

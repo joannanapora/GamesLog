@@ -9,7 +9,7 @@ ReactDOM.render(
     <BrowserRouter>
     <ThemeProvider>
     <App />
-  </ThemeProvider>,
+  </ThemeProvider>
     </BrowserRouter>,
   document.getElementById('root')
 );

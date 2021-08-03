@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+#root {
+  height: 100%;
+}
 .navbar {
   background-color: #2F5D62;
   height: 50px;
@@ -76,7 +79,7 @@ code {
     height: 88vh;
     position: absolute;
     top: 80px;
-    left: -100%;
+    left: -150%;
     opacity: 1;
     transition: all 0.5s ease;
  
