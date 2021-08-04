@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 130,
       margin: 2,
       backgroundColor: theme.palette.secondary.light,
-      border: '1px solid #2F5D62'
+      border: '0.5px solid gray'
     },
     image: {
       width: 130,
@@ -28,11 +28,12 @@ const useStyles = makeStyles((theme: Theme) =>
       maxHeight: '100%',
     },
     tekst: {
-        width: '140px',
+        width: '150px',
         display: 'block',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+     
     },
     text2: {
         width: '100%',
@@ -60,14 +61,18 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItems: 'center',
         fontSize: '15px'
     },
+    rate: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
     plats: {
-    
             width: '100%',
             display: 'flex',
             fontSize: '12px',
             flexDirection: 'column',
-            padding: 5,
-            minHeight: '80px'
+            padding: 2,
+            minHeight: '70px'
     }
   }),
 );
@@ -115,28 +120,24 @@ const MyGame = ({
             <ButtonBase className={classes.image}>
                 <div className={classes.imagebox} >
                  <div className={classes.rating}>
-                    SCORE: {rate}
+                 <Typography className={classes.tekst} gutterBottom variant="subtitle1">
+               {name} 
+                 </Typography>
                         </div>
               <img className={classes.img} alt="complex" src={image}/>
-              <Typography className={classes.status} variant="body2" color="textSecondary">
-               {status}
-                </Typography>
                 </div>
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography className={classes.tekst} gutterBottom variant="subtitle1">
-                  {name}
-                </Typography>
                 <Typography className={classes.text2} variant="body2" gutterBottom>
-                  <div>Start: {from}</div> <div>Finish: {to}</div>
+                  <div>Start: {from}</div> <div>Finish: {to}</div> <div>Score: {rate}</div><div>Platforms:</div>
                 </Typography>
                 <Typography className={classes.plats} variant="body2" gutterBottom>
                 {platformList.map((el)=>{
                    return <div>
-                       🔹{el}
+                       -{el}
                    </div>
                 })}
                 </Typography>

@@ -2,7 +2,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {useState} from 'react';
 import {Games} from "../Data";
-import MyGame from "./MyGame";
+import GridCard from "./GridCard";
 import Filters from '../AllGames/Filters';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
@@ -14,7 +14,9 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import List from '@material-ui/core/List';
 import ListCard from './ListCard';
-
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import CachedIcon from '@material-ui/icons/Cached';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,28 +51,58 @@ const useStyles = makeStyles((theme: Theme) =>
     view: {
       display: 'flex',
       width: '100%',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       alignItems: 'center',
+      padding: '0 100px',
+      [theme.breakpoints.down('md')]: {
+        padding: 0,
+      },
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        width: '100%',
+        margin: 0,
+      },
     },
     viewButton: {
-      height: '55px'
+      height: '100%',
+      width: '56px',
+      [theme.breakpoints.down('sm')]: {
+        margin: '10px 0',
+        width: '68px'
+      },
     },
     formControl: {
       margin: theme.spacing(1),
-      width: '30%',
-
+      width: '400px',
+      [theme.breakpoints.down('sm')]: {
+        width: '96%'
+      },
     },
     list: {
-      width: '100%',
       backgroundColor: theme.palette.secondary.light,
+      flexDirection: 'column',
+      alignItems: 'center',
+      [theme.breakpoints.down('md')]: {
+        padding: 0,
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        padding: 0,
+      },
     },
     rootList: {
       display: 'flex',
       margin: '0 12%',
+      justifyContent: 'center',
       flexDirection: 'column',
       [theme.breakpoints.down('md')]: {
         margin: 0,
         padding: 0,
+      },
+    },
+    settings: {
+      [theme.breakpoints.down('sm')]: {
+        width: '100%'
       },
     }
   }),
@@ -88,18 +120,20 @@ const MyGames = () => {
       [name]: event.target.value,
     });
   };
+
+  const showCards = () => {
+    console.log('show cards')
+  }
   
   const [state, setState] = useState<{ age: string | number; name: string }>({
     age: '',
     name: 'hai',
   });
 
-  return (
-    view === 'grid' ? 
-    <div className={classes.root} >
-{/* <Filters/> */}
-    <Grid container className={classes.grid}>
-<ToggleButtonGroup className={classes.view}  exclusive >
+  const displaySettings = () => {
+    return (
+<ToggleButtonGroup className={classes.view} value={view} exclusive >
+<div className={classes.settings} >
 <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-age-native-simple">Sort</InputLabel>
         <Select
@@ -120,25 +154,44 @@ const MyGames = () => {
           <option value={40}>Z-A</option>
         </Select>
       </FormControl>
-      <ToggleButton onClick={()=>setView('list')} className={classes.viewButton} aria-label="list">
-        <ViewListIcon />
-      </ToggleButton>
-      <ToggleButton onClick={()=>setView('grid')} className={classes.viewButton} aria-label="module">
-        <ViewModuleIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+        </div>
+        <div>
+          <ToggleButton onClick={showCards} className={classes.viewButton}aria-label="list">
+                  <DoneOutlineIcon />
+                </ToggleButton>
+                <ToggleButton onClick={showCards} className={classes.viewButton} aria-label="module">
+                  <CachedIcon />
+                </ToggleButton>
+                <ToggleButton onClick={showCards} className={classes.viewButton} aria-label="module">
+                  <VisibilityIcon />
+                </ToggleButton>
+          <ToggleButton onClick={()=>setView('list')} className={classes.viewButton}aria-label="list">
+            <ViewListIcon />
+          </ToggleButton>
+          <ToggleButton onClick={()=>setView('grid')} className={classes.viewButton} aria-label="module">
+            <ViewModuleIcon />
+          </ToggleButton>
+        </div>
+        </ToggleButtonGroup>
+    )
+  }
+
+  return (
+    view === 'grid' ? 
+    <div className={classes.root} >
+    <Grid container className={classes.grid}>
+{displaySettings()}
       <Grid item xs={12}>
-        <Grid style={{width: '100%'}} container spacing={1} justifyContent="center">
+        <Grid container spacing={1} justifyContent="center">
             {
                 data.map((card,i)=>{
                     return (
             <Grid key={i} item>
-              <MyGame platformList={card.platformFinished} status={card.status} from={card.from} to={card.to} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
+              <GridCard platformList={card.platformFinished} status={card.status} from={card.from} to={card.to} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
 </Grid>
                     )
                 })
             }
-
         </Grid>
       </Grid>
     </Grid>
@@ -146,42 +199,15 @@ const MyGames = () => {
     :
     <div className={classes.rootList} >
       <Grid container className={classes.grid}>
-<ToggleButtonGroup className={classes.view} value={view} exclusive >
-<FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Sort</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleSort}
-          label="Age"
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Highest rate</option>
-          <option value={20}>Lowest rate</option>
-          <option value={50}>Last played</option>
-          <option value={30}>A-Z</option>
-          <option value={40}>Z-A</option>
-        </Select>
-      </FormControl>
-      <ToggleButton onClick={()=>setView('list')} className={classes.viewButton}aria-label="list">
-        <ViewListIcon />
-      </ToggleButton>
-      <ToggleButton onClick={()=>setView('grid')} className={classes.viewButton} aria-label="module">
-        <ViewModuleIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+      {displaySettings()}
     </Grid>
     <List className={classes.list}>
     {
                 data.map((card,i)=>{
                     return (
-            <Grid key={i} item>
+          
               <ListCard platformList={card.platformFinished} status={card.status} from={card.from} to={card.to} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
-</Grid>
+
                     )
                 })
             }
