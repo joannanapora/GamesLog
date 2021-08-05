@@ -6,7 +6,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import '../../index.css'
 import { ThemeContext } from "../ThemeProvider";
 import mainLogo from'../../gl.png';
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { Box } from "@material-ui/core";
 
 

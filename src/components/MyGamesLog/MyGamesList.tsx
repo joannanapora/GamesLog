@@ -13,7 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import List from '@material-ui/core/List';
-import ListCard from './ListCard';
+import CardsList from './CardsList';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import CachedIcon from '@material-ui/icons/Cached';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      margin: '0 12%',
-      flexDirection: 'row',
+      margin: '2% 8%',
+      flexDirection: 'column',
       [theme.breakpoints.down('md')]: {
         margin: 0,
         padding: 0,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grid: {
       flexGrow: 1,
-      padding: 30,
+      padding: '50px',
       [theme.breakpoints.down('md')]: {
         display: 'flow-root',
         padding: 30,
@@ -51,9 +51,8 @@ const useStyles = makeStyles((theme: Theme) =>
     view: {
       display: 'flex',
       width: '100%',
-      justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '0 100px',
+      justifyContent: 'center',
       [theme.breakpoints.down('md')]: {
         padding: 0,
       },
@@ -82,6 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.secondary.light,
       flexDirection: 'column',
       alignItems: 'center',
+      display: 'flex',
       [theme.breakpoints.down('md')]: {
         padding: 0,
       },
@@ -90,19 +90,11 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 0,
       },
     },
-    rootList: {
-      display: 'flex',
-      margin: '0 12%',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      [theme.breakpoints.down('md')]: {
-        margin: 0,
-        padding: 0,
-      },
-    },
     settings: {
+      padding: '30px 0',
       [theme.breakpoints.down('sm')]: {
-        width: '100%'
+        width: '100%',
+        padding: 0
       },
     }
   }),
@@ -177,17 +169,18 @@ const MyGames = () => {
   }
 
   return (
-    view === 'grid' ? 
+    
     <div className={classes.root} >
-    <Grid container className={classes.grid}>
 {displaySettings()}
+{view === 'grid' ? 
+    <Grid container className={classes.grid}>
       <Grid item xs={12}>
-        <Grid container spacing={1} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center">
             {
                 data.map((card,i)=>{
                     return (
             <Grid key={i} item>
-              <GridCard platformList={card.platformFinished} status={card.status} from={card.from} to={card.to} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
+              <GridCard from={card.from} to={card.to} status={card.status} wanttoplay={card.wanttoplay} inprogress={card.inprogress} popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
 </Grid>
                     )
                 })
@@ -195,25 +188,11 @@ const MyGames = () => {
         </Grid>
       </Grid>
     </Grid>
-    </div>
-    :
-    <div className={classes.rootList} >
-      <Grid container className={classes.grid}>
-      {displaySettings()}
-    </Grid>
-    <List className={classes.list}>
-    {
-                data.map((card,i)=>{
-                    return (
-          
-              <ListCard platformList={card.platformFinished} status={card.status} from={card.from} to={card.to} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
-
-                    )
-                })
-            }
-    </List>
-    </div>
-  );
-}
+:
+              <CardsList />
+};
+              </div>
+  )
+};
 
 export default MyGames;

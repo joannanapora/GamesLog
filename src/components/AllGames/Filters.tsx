@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     formControl: {
       margin: theme.spacing(1),
-      borderBottom: '1px solid #DFEEEA',
+      borderBottom: '3px solid #DFEEEA',
       width: '100%'
     },
     labels: {
@@ -66,9 +66,9 @@ flexDirection: 'column',
         width: '100%',
       },
     checked: {
-        color: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText,
         "&$checked": {
-            color: theme.palette.secondary.light,          }
+            color: theme.palette.secondary.contrastText,          }
     }
   },
     ),
@@ -105,12 +105,6 @@ const Filters = () => {
      five: false,
   });
 
-    const [status, setStatus] = React.useState({
-      played: false,
-      inprogress: false,
-      wanttoplay: false,
-      neverplayed: false,
-  });
     
     const [filtersOn, setFiltersOn] = React.useState(true);
     const themeMaterial = useTheme();
@@ -187,7 +181,7 @@ const Filters = () => {
   return (
     <div className={classes.root}>
                <CssTextField
-        label="Search game"
+        label="Search game..."
         variant="outlined"
         id="custom-css-outlined-input"
       />

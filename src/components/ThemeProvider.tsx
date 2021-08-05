@@ -20,7 +20,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
   const palletType = isDark(theme) ? 'dark' : 'light';
   const mainPrimary = isDark(theme) ? '#424242' : '#5E8B7E';
   const lightPrimary = isDark(theme) ? '#616161' : '#A7C4BC';
-  const darkPrimary = isDark(theme) ? '#2196f3' : '#DFEEEA';
+  const darkPrimary = isDark(theme) ? '#DFEEEA' : '#DFEEEA';
   const mainSecondary = isDark(theme) ? '#202020' : '#FAFAFA';
   const mainFunctions = isDark(theme) ? '#2F5D62' : '#FAFAFA';
 

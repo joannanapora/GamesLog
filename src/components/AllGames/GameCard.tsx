@@ -102,7 +102,7 @@ const GameCard = ({
       <CardHeader
         avatar={
           <Avatar
-            aria-label="recipe"
+            aria-label="rate"
           >
             {rate}
           </Avatar>
@@ -130,7 +130,7 @@ const GameCard = ({
           {info}
         </Typography>
       </CardContent>
-      <CardActions style={{backgroundColor: 'white', border: '2px solid #d8eaec'}} >
+      <CardActions style={{display: 'flex', justifyContent: 'flex-end'}} >
         {platforms.map((el: any, i: number) => {
           return <img key={i} height="20px" width="20px" src={el} alt="" />;
         })}
