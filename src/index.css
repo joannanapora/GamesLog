@@ -1,5 +1,5 @@
 body {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Monda', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
@@ -8,8 +8,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Monda', sans-serif;
 }
 
 #root {
@@ -19,11 +18,11 @@ code {
 .navbar {
   background-color: #2F5D62;
   height: 50px;
-  padding-top: 120px;
+  padding-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   top: 0;
   z-index: 1000;
 }
@@ -37,7 +36,7 @@ code {
   justify-content: center;
   align-items: center;
   height: 20px;
-  width: 100%;
+  width: 100%; 
 }
 
 .menu {
@@ -47,7 +46,7 @@ code {
   width: 100%;
   align-items: center;
   justify-content: space-evenly;
-  margin: 0 150px;
+  margin-left: 120px;
 }
 
 .nav-links {
@@ -55,17 +54,19 @@ code {
   align-items: center;
   text-decoration: none;
   color: #FAFAFA;
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
+
 .menu-icon {
-  display: none
+  display: none;
 }
 
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
   }
-
 
   .navbar {
     padding-top: 30px;
@@ -153,7 +154,7 @@ code {
   .logo {
     position: absolute;
     top: 0%;
-    left: 48%;
-    height: 140px;
+    left: 3%;
+    height: 150px;
   }
 };

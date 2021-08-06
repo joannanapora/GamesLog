@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grid: {
       flexGrow: 1,
-      padding: '50px',
+      padding: '50px 0 50px 100px',
       [theme.breakpoints.down('md')]: {
         display: 'flow-root',
         padding: '50px'
@@ -46,7 +46,7 @@ const GameCardList = () => {
 <Filters/>
     <Grid container className={classes.grid}>
    
-        <Grid style={{width: '100%'}} container spacing={1} justifyContent="center">
+        <Grid container spacing={2}>
             {
                 data.map((card,i)=>{
                     return (

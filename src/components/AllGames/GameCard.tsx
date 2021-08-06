@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Rating from '@material-ui/lab/Rating';
-import { Typography } from '@material-ui/core';
+import { Tooltip, Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Modal from '../Modal';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       minWidth: 290,
       maxWidth: 290,
+      cursor: 'pointer',
       transition: theme.transitions.create(['transform'], {
         duration: theme.transitions.duration.standard,
       }),
-      '&:hover': {
-        transform: 'scale(1.03)',
+      '& .MuiTypography-displayBlock': {
+        fontFamily: 'Monda' 
       },
     },
     media: {
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     info: {
       minHeight: 120,
+        fontFamily: 'Monda',
+        fontSize: '13px'
     },
     header: {
       fontWeight: 500,
@@ -46,6 +49,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+
 
 const GameCard = ({
   wanttoplay,
@@ -107,7 +112,13 @@ const GameCard = ({
             {rate}
           </Avatar>
         }
-        action={status === 'none' ?   <LibraryAddIcon /> : null }
+        action={status === 'none' ? 
+        <Tooltip title="Change game status" aria-label="add">
+        <IconButton>
+          <LibraryAddIcon /> 
+          </IconButton>
+          </Tooltip>
+          : null }
         title={name}
       />
       <CardMedia className={classes.media} image={image} />
@@ -130,7 +141,7 @@ const GameCard = ({
           {info}
         </Typography>
       </CardContent>
-      <CardActions style={{display: 'flex', justifyContent: 'flex-end'}} >
+      <CardActions style={{display: 'flex', justifyContent: 'flex-end', opacity: 0.3}} >
         {platforms.map((el: any, i: number) => {
           return <img key={i} height="20px" width="20px" src={el} alt="" />;
         })}

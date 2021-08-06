@@ -5,9 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
-import GLButton from '../Buttons/GLButton';
 import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
 import { ratingList, genreList, platformList } from '../Data';
@@ -20,14 +18,23 @@ import SearchIcon from '@material-ui/icons/Search';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        width: '400px',
+        width: '300px',
       display: 'flex',
       flexDirection: 'column',
       margin: 10,
       padding: 10,
+      '& .MuiTypography-body1': {
+        fontSize: '14px',
+        fontFamily: 'Monda' 
+      },
+      
       [theme.breakpoints.down('xs')]: {
         borderRight: 'none',
         width: '90%',
+      },
+      '& .MuiFormLabel-root': {
+        color: theme.palette.secondary.contrastText,
+        fontFamily: 'Monda' 
       },
     },
     buttonCtn: {
@@ -38,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       margin: theme.spacing(1),
       borderBottom: '3px solid #DFEEEA',
-      width: '100%'
+      width: '100%',
     },
     labels: {
 display: 'flex',
@@ -67,12 +74,15 @@ flexDirection: 'column',
       },
     checked: {
         color: theme.palette.secondary.contrastText,
+        
         "&$checked": {
             color: theme.palette.secondary.contrastText,          }
     }
   },
     ),
 );
+
+
 
 
 const Filters = () => {
@@ -130,30 +140,6 @@ const Filters = () => {
     setFiltersOn((prev) => !prev);
   }
 
-
-  const marks = [
-    {
-      value: 1,
-      label: '1',
-    },
-    {
-      value: 2,
-      label: '2',
-    },
-    {
-      value: 3,
-      label: '3',
-    },
-    {
-      value: 4,
-      label: '4',
-    },
-    {
-        value: 5,
-        label: '5',
-      },
-  ];
-
   const CssTextField = withStyles({
     root: {
       '& label.Mui-focused': {
@@ -177,7 +163,6 @@ const Filters = () => {
   })(TextField);
 
 
-
   return (
     <div className={classes.root}>
                <CssTextField
@@ -193,7 +178,7 @@ const Filters = () => {
         color="secondary"
         startIcon={<FilterListIcon />}
       >
-        {!filtersOn ? 'Filters' : 'Hide filters'}
+        Filters
       </Button>
       <Button
        className={classes.button}

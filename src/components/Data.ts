@@ -1,17 +1,18 @@
 import animalCrossing from'../assets/games/AC.jpg';
 import rocketLeague from "../assets/games/RL.jpg";
 import nintendo from "../assets/games/nintendo.png";
-import xbox from "../assets/games/xxx.png";
+import xbox from "../assets/games/xbox.png";
 import ps from "../assets/games/pslogo.png";
-import win from "../assets/games/win.png";
+import win from "../assets/games/windows.png";
 import forza from "../assets/games/forza.png";
 import worms from "../assets/games/worms.jpg";
 import zelda from "../assets/games/zelda.jpg";
 import ot from "../assets/games/ot.jpg";
-import stadia from "../assets/games/stadia.png";
 import dst from "../assets/games/dst.jpg";
 import gta from "../assets/games/gta.jpg"
 import pok from "../assets/games/pok.jpg"
+import mac from "../assets/games/macbook.jpg"
+
 export const Games = [
     {
         id: '1',
@@ -53,7 +54,7 @@ export const Games = [
         rate: 4.2,
         shortInfo: 'Forza Horizon 4 is a 2018 racing video game developed by Playground Games and published by Microsoft Studios.',
         jpg: forza,
-        platforms : [xbox,win],
+        platforms : [xbox,win, mac],
         played: false,
         popularity: 436,
         wanttoplay:true,
@@ -104,7 +105,7 @@ export const Games = [
         rate: 4.8,
         shortInfo: 'Octopath Traveler is a role-playing video game developed by Square Enix and Acquire. The game was released for the Nintendo Switch in 2018, for Microsoft Windows in 2019, for Stadia in 2020, and for Xbox One in 2021.',
         jpg: ot,
-        platforms : [nintendo, xbox,ps,win, stadia],
+        platforms : [nintendo, xbox,ps,win],
         played: false,
         popularity: 82,
         wanttoplay:false,

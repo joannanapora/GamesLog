@@ -12,11 +12,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Avatar, Button } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardHeader from '@material-ui/core/CardHeader';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-     width: '350px',
+     width: '200px',
       transition: theme.transitions.create(['transform'], {
         duration: theme.transitions.duration.standard,
       }),
@@ -44,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'space-between',
       padding: '2px 0',
-      fontSize: '20px',
+      fontSize: '13px',
       color: ''
     },
     name: {
@@ -59,11 +62,25 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-between',
       alignItems: 'center',
       marginLeft: '10px',
-      fontSize: '25px'
-      
-    }
+      fontSize: '0.875rem'
+    },
   })
 );
+
+interface IGridCard {
+  wanttoplay: boolean;
+  inprogress: boolean;
+  popularity: number;
+  played: boolean;
+  name: string;
+  rate: number;
+  image: any;
+  platforms: any;
+  info: string;
+  status: string;
+  from: string;
+  to: string;
+}
 
 const GridCard = ({
   wanttoplay,
@@ -77,21 +94,7 @@ const GridCard = ({
   status,
   from,
   to
-}: {
-  wanttoplay: boolean;
-  inprogress: boolean;
-  popularity: number;
-  played: boolean;
-  name: string;
-  rate: number;
-  image: any;
-  platforms: any;
-  info: string;
-  status: string;
-  from: string;
-  to: string
-
-}) => {
+}:IGridCard) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const themeMaterial = useTheme();
@@ -104,9 +107,16 @@ const GridCard = ({
   const handleClose = () => {
     setOpen(false);
   };
+  const handleSettingsOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const addToGamesLog = (name: string) => {};
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
+  const handleCloseSettings = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Card
@@ -124,10 +134,21 @@ const GridCard = ({
       )}
       <div className={classes.head}>
         {name}
-        <IconButton aria-label="settings">
+        <IconButton
+        aria-controls="simple-menu" aria-haspopup="true" onClick={handleSettingsOpen}>
             <MoreVertIcon />
           </IconButton>   
       </div>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleCloseSettings}
+      >
+        <MenuItem onClick={handleCloseSettings}>Update</MenuItem>
+        <MenuItem onClick={handleCloseSettings}>Remove</MenuItem>
+      </Menu>
       <CardMedia className={classes.media} image={image} />
       <CardContent>
       <div className={classes.content}>
@@ -148,8 +169,8 @@ const GridCard = ({
           </div>
           <div className={classes.content}>
           <div>Platforms</div>
-          <div>  {platforms.map((el: any, i: number) => {
-          return <img key={i} height="20px" width="20px" src={el} alt="" />;
+          <div >  {platforms.map((el: any, i: number) => {
+          return <img  key={i} height="15px" style={{margin: '0 1px'}} width="15px" src={el} alt="" />;
         })}</div>
           </div>
       </CardContent>

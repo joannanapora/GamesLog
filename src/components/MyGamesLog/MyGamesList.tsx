@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      padding: '30px',
       margin: '2% 8%',
       flexDirection: 'column',
       [theme.breakpoints.down('md')]: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     viewButton: {
-      height: '100%',
+      height: '56px',
       width: '56px',
       [theme.breakpoints.down('sm')]: {
         margin: '10px 0',
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     formControl: {
       margin: theme.spacing(1),
-      width: '400px',
+      width: '300px',
       [theme.breakpoints.down('sm')]: {
         width: '96%'
       },
@@ -91,10 +92,15 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     settings: {
-      padding: '30px 0',
+      borderRight: '3px solid #DFEEEA',
+      marginRight: 60,
+      paddingRight: 60,
       [theme.breakpoints.down('sm')]: {
         width: '100%',
-        padding: 0
+        padding: 0,
+        borderRight: 'none',
+        marginRight: 0,
+        paddingRight: 0,
       },
     }
   }),
@@ -175,7 +181,7 @@ const MyGames = () => {
 {view === 'grid' ? 
     <Grid container className={classes.grid}>
       <Grid item xs={12}>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={1}>
             {
                 data.map((card,i)=>{
                     return (
