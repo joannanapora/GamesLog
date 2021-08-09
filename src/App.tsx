@@ -4,6 +4,8 @@ import GameCardList from './components/AllGames/AllGamesList';
 import MyGames from "./components/MyGamesLog/MyGamesList";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Footer from './components/Footer/Footer';
+import CardPage from './components/CardPage/CardPage';
+
 const App = () => {
 
   const useStyles = makeStyles((theme: Theme) =>
@@ -23,6 +25,9 @@ const App = () => {
     <Switch>
     <Route exact path='/' component={GameCardList} />
     <Route exact path='/mygames' component={MyGames} />
+    <Route path="/game/:path" component={CardPage} />
+    <Route path="/" component={GameCardList} />
+
 </Switch>
 <Footer/>
 </div>

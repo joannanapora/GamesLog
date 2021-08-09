@@ -20,7 +20,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     column: {
-        fontSize:'18px',
+        fontSize:'13px',
         color: theme.palette.primary.contrastText,
     },
       details: {
@@ -35,8 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
         textDecoration: 'none',
       },
       grid: {
-        padding: '30px 30%',
-        height: '10%',
+        padding: '20px 30%',
         alignContent: 'center',
         backgroundColor: theme.palette.primary.light,
         [theme.breakpoints.down('md')]: {
@@ -67,19 +66,19 @@ const Footer = () => {
       <Grid item xs={3}>
       <div className={classes.column}>
          <div>
-         Contact us:
+         Contact:
              </div> 
              <div>
              Joanna 
              </div> 
              <div>
-             07564 247045
+             07564 247766
              </div> 
              <div>
              Adrianna 
              </div> 
              <div>
-             07564 243826
+             07564 246543
              </div>
           </div>
       </Grid>
@@ -104,7 +103,7 @@ const Footer = () => {
       <AccordionDetails className={classes.details}>
 <div className={clsx(classes.column, classes.helper)}>
   <Typography variant="caption">
-   Fallow Us:
+   Follow:
     <br />
     <a href="#secondary-heading-and-columns" className={classes.link}>
     <TwitterIcon/> <FacebookIcon/> <InstagramIcon/> <GitHubIcon/>
@@ -115,7 +114,7 @@ const Footer = () => {
       </Grid>
       <Grid style={{display:'flex', justifyContent:'center', marginTop: '50px', fontSize: '18px'}} justifyContent='center' item xs={12}>
       <div className={classes.column} >
-      Copyright © 2022 Design by SuperProgramisci of SuperStronki
+      Copyright © 2022 Design by SuperProgramisci
           </div> 
       </Grid>
     </Grid>

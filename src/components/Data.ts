@@ -11,7 +11,7 @@ import ot from "../assets/games/ot.jpg";
 import dst from "../assets/games/dst.jpg";
 import gta from "../assets/games/gta.jpg"
 import pok from "../assets/games/pok.jpg"
-import mac from "../assets/games/macbook.jpg"
+import mac from "../assets/games/apple.png"
 
 export const Games = [
     {
@@ -30,6 +30,7 @@ export const Games = [
         status: "played",
         platformFinished: ['Nintendo', 'xBox'],
         recommandToOthers: false,
+        path: '/animal-crossing'
     },
     {
         id: '2',

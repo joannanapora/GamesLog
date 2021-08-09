@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import {cardColor, Games} from "../Data";
 import GameCard from './GameCard';
 import Filters from './Filters';
+import { Redirect, Route, withRouter } from 'react-router';
+import CardPage from '../CardPage/CardPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,9 +38,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const GameCardList = () => {
+const GameCardList = ({history}:any) => {
   const classes = useStyles();
   const data = Games;
+
+  const handleRedirect = (path:any) => {
+    if (path) {
+      // history.replace(`game${path}`, {})
+      
+//       <Route exact path={path}>
+//  <CardPage />
+// </Route>
+    }
+  }
  
 
   return (
@@ -46,12 +58,12 @@ const GameCardList = () => {
 <Filters/>
     <Grid container className={classes.grid}>
    
-        <Grid container spacing={2}>
+        <Grid justifyContent='center'container spacing={2}>
             {
                 data.map((card,i)=>{
                     return (
             <Grid key={i} item>
-              <GameCard status={card.status} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
+              <GameCard path={card.path} status={card.status} wanttoplay={card.wanttoplay} inprogress={card.inprogress}  popularity={card.popularity} played={card.played} info={card.shortInfo} platforms={card.platforms} name={card.name} rate={card.rate} image={card.jpg} />
             </Grid>
                     )
                 })
@@ -63,4 +75,4 @@ const GameCardList = () => {
   );
 }
 
-export default GameCardList;
+export default withRouter(GameCardList);

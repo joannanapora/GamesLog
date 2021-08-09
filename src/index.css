@@ -54,8 +54,12 @@ code {
   align-items: center;
   text-decoration: none;
   color: #FAFAFA;
-  padding-left: 10px;
-  padding-bottom: 10px;
+  cursor: pointer;
+}
+.nav-links:hover {
+  color: #5E8B7E;
+  transition: 250ms;
+  cursor: pointer;
 }
 
 
@@ -94,53 +98,15 @@ code {
     z-index: 1000;
     padding: 0;
     margin: 0;
-   
   }
-
-  .nav-links {
-    text-align: center;
-    padding: 2rem;
-    width: 100%;
-    display: table;
-    background-color: rgba(155, 205, 212, 255);
-  }
-
-
   .menu-icon {
     display: block;
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(-100%, 60%);
+    transform: translate(-60%, 50%);
     cursor: pointer;
   }
-
-  .x-btn {
-    color: #fff;
-  }
-
-  .hamburger-btn {
-    color: #fff;
-  }
-
-  .nav-links {
-    display: block;
-    text-align: center;
-    margin: 10px auto;
-    border-radius: 4px;
-    width: 100%;
-    text-decoration: none;
-    background-color: transparent;
-    color: #fff;
-    padding: 0;
-    transition: all 0.3s ease-out;
-  }
-
-  .nav-links:hover {
-    color: #5E8B7E;
-    transition: 250ms;
-  }
-
 }
 
 .logo {

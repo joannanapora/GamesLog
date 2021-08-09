@@ -7,15 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import Rating from '@material-ui/lab/Rating';
 import { Tooltip, Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Modal from '../Modal';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import CheckIcon from '@material-ui/icons/Check';
 import { useTheme } from '@material-ui/core/styles';
-import { cardColor } from '../Data';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,7 +59,8 @@ const GameCard = ({
   image,
   platforms,
   info,
-  status
+  status,
+  path,
 }: {
   wanttoplay: boolean;
   inprogress: boolean;
@@ -72,13 +71,14 @@ const GameCard = ({
   image: any;
   platforms: any;
   info: string;
-  status: string
+  status: string;
+  path: any;
 }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const themeMaterial = useTheme();
 
-  const handleClickOpen = (name: string) => {
+  const handleClickOpen = (name: any) => {
     setOpen(true);
     addToGamesLog(name);
   };
@@ -89,8 +89,8 @@ const GameCard = ({
 
   const addToGamesLog = (name: string) => {};
 
-
   return (
+    <Link style={{textDecoration:'none'}} to={`/game${path}`} >
     <Card
       style={{
         backgroundColor: themeMaterial.palette.secondary.light,
@@ -121,6 +121,7 @@ const GameCard = ({
           : null }
         title={name}
       />
+      
       <CardMedia className={classes.media} image={image} />
       <CardContent>
         <div className={classes.rating}>
@@ -147,6 +148,7 @@ const GameCard = ({
         })}
       </CardActions>
     </Card>
+    </Link>
   );
 };
 

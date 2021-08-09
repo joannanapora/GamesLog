@@ -29,7 +29,6 @@ function renderPlatforms(params : any) {
     </div>
   )
   
- 
 };
 
 const columns = [

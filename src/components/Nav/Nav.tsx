@@ -19,7 +19,6 @@ const Nav = () => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const { toggleTheme } = React.useContext(ThemeContext);
-  const themeMaterial = useTheme();
 
   const CssTextField = withStyles({
     root: {
@@ -53,16 +52,23 @@ const Nav = () => {
     },
   })(TextField);
 
+const handleToggle = () => {
+  toggleTheme();
+  closeMobileMenu();
+}
+
   return (
       <Box>
     <nav className="navbar">
       <div className="navbar-container">
+      <Link to='/' >
       <img className='logo' src={mainLogo} alt='' ></img>
+      </Link>
         <div className="menu-icon" onClick={handleClick}>
           {click ? (
-            <ClearIcon/>
+            <ClearIcon fontSize='large' />
           ) : (
-            <MenuIcon/>
+            <MenuIcon fontSize='large'/>
           )}
         </div>
         <ul className={click ? "menu active" : "menu"}>
@@ -95,7 +101,7 @@ const Nav = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <div className="nav-links" onClick={toggleTheme}>
+            <div className="nav-links" onClick={handleToggle}>
               dark/light
             </div>
           </li>
@@ -105,8 +111,7 @@ const Nav = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <div className="nav-links">
-              
+            <div className="nav-links">     
 <CssTextField
 label="Search game..."
 variant="outlined"

@@ -93,7 +93,7 @@ const GridCard = ({
   info,
   status,
   from,
-  to
+  to,
 }:IGridCard) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
