@@ -182,7 +182,7 @@ const CardPage = () => {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <Paper className={classes.paper}>
-               ffff
+               TABS
                     </Paper>
                 </Grid>
             </Grid>
