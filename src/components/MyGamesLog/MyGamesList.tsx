@@ -179,9 +179,9 @@ const MyGames = () => {
     <div className={classes.root} >
 {displaySettings()}
 {view === 'grid' ? 
-    <Grid container className={classes.grid}>
-      <Grid item xs={12}>
-        <Grid container spacing={1}>
+    <Grid  container className={classes.grid}>
+      <Grid  item xs={12}>
+        <Grid justifyContent='center' container spacing={1}>
             {
                 data.map((card,i)=>{
                     return (
@@ -196,7 +196,7 @@ const MyGames = () => {
     </Grid>
 :
               <CardsList />
-};
+}
               </div>
   )
 };

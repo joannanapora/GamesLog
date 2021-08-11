@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       flexGrow: 1,
       padding: '50px 0 50px 100px',
+      justifyContent: 'center',
       [theme.breakpoints.down('md')]: {
         display: 'flow-root',
         padding: '50px'
@@ -56,9 +57,9 @@ const GameCardList = ({history}:any) => {
   return (
     <div className={classes.root} >
 <Filters/>
-    <Grid container className={classes.grid}>
+    <Grid  justifyContent='center' container className={classes.grid}>
    
-        <Grid justifyContent='center'container spacing={2}>
+        <Grid justifyContent='center' container spacing={2}>
             {
                 data.map((card,i)=>{
                     return (

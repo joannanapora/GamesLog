@@ -27,7 +27,6 @@ const App = () => {
     <Route exact path='/mygames' component={MyGames} />
     <Route path="/game/:path" component={CardPage} />
     <Route path="/" component={GameCardList} />
-
 </Switch>
 <Footer/>
 </div>

@@ -14,6 +14,16 @@ import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
+import { Button } from '@material-ui/core';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import Reviews from "./Reviews";
+import YouTube from '../YouTube/Youtube';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('md')]: {
                 margin: 0,
                 padding: 0,
+                width: '100%',
             },
             [theme.breakpoints.down('xs')]: {
                 width: '100%',
@@ -33,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         paper: {
-            padding: theme.spacing(2),
             color: theme.palette.text.secondary,
             border: 'none',
             boxShadow: 'none',
@@ -41,17 +51,19 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'flex-end',
             flexDirection: 'column',
             fontSize: '14px',
-            backgroundColor: 'transparent'
-           
+            backgroundColor: 'transparent',
+            height: 'inherit',
+            marginBottom: 30
         },
         stats: {
             display: 'flex',
             padding: '20px 0',
+            
         },
         rec: {
             display: 'flex',
             justifyContent: 'center',
-            paddingTop: '20px'
+            
         },
         divider: {
             border: `2px solid ${theme.palette.primary.light}`,
@@ -60,33 +72,93 @@ const useStyles = makeStyles((theme: Theme) =>
         header: {
             display: 'flex',
             justifyContent: 'space-between',
-            borderLeft: `7px solid ${theme.palette.primary.light}`,
-            paddingLeft: '20px'
+            padding: '0 60px',
+            [theme.breakpoints.down('sm')]: {
+                padding: '0 10px',
+                fontSize: '13px',
+            },
         },
         grid: {
             flexGrow: 1,
-            padding: '50px',
+            margin: '50px',
             maxWidth: '1200px',
             justifyContent:'center',
             [theme.breakpoints.down('md')]: {
-                display: 'flow-root',
-                padding: 30,
+                margin: 20,
             },
             [theme.breakpoints.down('sm')]: {
-                padding: 10,
+                margin: 10,
             },
         },
         list: {
             width: '100%',
             maxWidth: 400,
             backgroundColor: 'transparent'
-        }
+        },
+        tabs: {
+            flexGrow: 1,
+            backgroundColor: theme.palette.background.paper,
+          },
+          body: {
+              paddingLeft: '60px',
+              [theme.breakpoints.down('sm')]: {
+                padding: '0 10px',
+            },
+          },
+          button: {
+              height: '70px',
+              marginTop: '50px',
+              [theme.breakpoints.down('sm')]: {
+                marginTop: 10,
+                height: '50px',
+            },
+          },
     }),
 );
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: any;
+    value: any;
+  }
+  
 
 const CardPage = () => {
     const classes = useStyles();
     const data = Games;
+    const [value, setValue] = React.useState(0);
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+        setValue(newValue);
+      };
+const hnadleSeeFriends = () => {
+    console.log('check friends')
+}
+      function a11yProps(index: any) {
+        return {
+          id: `simple-tab-${index}`,
+          'aria-controls': `simple-tabpanel-${index}`,
+        };
+      }
+
+      function TabPanel(props: TabPanelProps) {
+        const { children, value, index, ...other } = props;
+      
+        return (
+          <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+          >
+            {value === index && (
+              <Box p={3}>
+                <Typography>{children}</Typography>
+              </Box>
+            )}
+          </div>
+        );
+      }
 
     return (
         <div className={classes.root}>
@@ -94,6 +166,9 @@ const CardPage = () => {
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
                         <img src={data[0].jpg} alt='game' />
+                        <div className={classes.body} >  <h4>
+                            Recommend:
+                        </h4>
                         <div className={classes.rec} >
                             <div >
                                 <strong style={{ fontSize: '20px' }} >94%</strong>  <ThumbUp />
@@ -103,34 +178,18 @@ const CardPage = () => {
                                 <ThumbDown />  <strong style={{ fontSize: '20px' }} >6%</strong>
                             </div>
                         </div>
-                        <h4>
-                            Friends with {data[0].name} in GamesLog:
-                        </h4>
-                        <List className={classes.list}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Tankusowaty" secondary="Score: 6.9" />
-        <ListItemText  secondary="Review" />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-          <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_737fa88661c6.jpg' />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Phoenicia4" secondary="Score: 8.1" />
-        <ListItemText  secondary="" />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-<p>
-      See More...
-</p>
-    </List>
+                      
+                        <Button
+       onClick={hnadleSeeFriends}
+        variant="contained"
+        color="secondary"
+        fullWidth
+        className={classes.button}
+        endIcon={<SupervisedUserCircleIcon/>}
+      >
+        FRIENDS and {data[0].name}
+      </Button>
+    </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -143,6 +202,7 @@ const CardPage = () => {
                                 {data[0].rate}/10
                             </h1>
                         </div>
+                        <div className={classes.body} >
                         <h4>
                             Statisctics:
                         </h4>
@@ -177,12 +237,29 @@ const CardPage = () => {
                         </h4>
                         <li>123 reviews</li>
                         <li>492 comments </li>
-
+</div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <Paper className={classes.paper}>
-               TABS
+                    <div className={classes.tabs}>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="ALL REVIEWS" {...a11yProps(0)} />
+          <Tab label="YOUTUBE PREVIEW" {...a11yProps(1)} />
+          <Tab label="TWITCH PREVIEW" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+       <Reviews/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+       <YouTube/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        TWITCH
+      </TabPanel>
+    </div>
                     </Paper>
                 </Grid>
             </Grid>
