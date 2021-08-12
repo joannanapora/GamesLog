@@ -16,14 +16,24 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       backgroundColor: theme.palette.background.paper,
+      '& .MuiBox-root-77': {
+        [theme.breakpoints.down('sm')]: {
+          margin: 0,
+          padding: 0,
+        },
+      },
     },
     review: {
-        padding: '20px 10%',
+        padding: '0 10%',
         width: '85%',
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        fontSize: '13px'
     },
     myreview: {
         backgroundColor: theme.palette.primary.light,
+    },
+    listitem: {
+      padding: '5px 0',
     }
   }),
 );
@@ -38,92 +48,104 @@ const Reviews = () => {
             My Animal Crossing review:
             </h4>
     <div className={classes.myreview}>
-    <ListItem >
+    <ListItem className={classes.listitem} >
       <ListItemAvatar>
         <Avatar>
           <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Porczi" secondary={  <Rating
-            size="medium"
+      <ListItemText primary="Porczi"/>
+      <ListItemText primary='12/03/2020' />
+      <ListItemText primary='2.1' />
+
+
+      <ListItemText primary={  <Rating
+            size="small"
           readOnly
           name="feedback"
           value={2.2}
           precision={0.5}
         />} />
-        
-      <ListItemText primary='Score'  secondary='3.3' />
-      <ListItemText primary='Date'  secondary='12/03/2020' />
     </ListItem>
     <div className={classes.review} >
         "Ujdzie"
     </div>
     </div>
-    <Divider variant="inset" component="li" />
     <h4>
             Other Players reviews:
             </h4>
-    <ListItem>
+            <ListItem className={classes.listitem} >
       <ListItemAvatar>
         <Avatar>
           <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Tankusowaty" secondary={  <Rating
-          size="medium"
+      <ListItemText primary="Tankusowaty"/>
+      <ListItemText primary='12/03/2020' />
+      <ListItemText primary='2.6' />
+
+
+      <ListItemText primary={  <Rating
+            size="small"
           readOnly
           name="feedback"
-          value={3.3}
+          value={2.6}
           precision={0.5}
         />} />
-        
-      <ListItemText primary='Score'  secondary='3.3' />
-      <ListItemText primary='Date'  secondary='12/03/2020' />
     </ListItem>
     <div className={classes.review} >
-        "Gierka była super , ho ho, zagłabym jeszcze raz. Polecam wszystkim małym i dużym dzieciom, dorosłym i panu z psem"
+        "Ujdzie"
+   
     </div>
     <Divider variant="inset" component="li" />
-    <ListItem>
+    <ListItem className={classes.listitem} >
       <ListItemAvatar>
         <Avatar>
         <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_737fa88661c6.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Phoenicia4" secondary={  <Rating
-           size="medium"
+      <ListItemText primary="Phoenicia4"/>
+      <ListItemText primary='12/03/2020' />
+      <ListItemText primary='1.1' />
+
+
+      <ListItemText primary={  <Rating
+            size="small"
           readOnly
           name="feedback"
-          value={1.3}
+          value={1.1}
           precision={0.5}
         />} />
-         <ListItemText primary='Score'  secondary='1.3' />
-      <ListItemText primary='Date'  secondary='12/03/2020' />
     </ListItem>
     <div className={classes.review} >
-        "Ojej, nie zagram już w to gónwo, nie polecam nikomu, unfollow"
+        "nie zagram w to wiecej nara"
     </div>
+  
     <Divider variant="inset" component="li" />
-    <ListItem>
+    <ListItem className={classes.listitem} >
       <ListItemAvatar>
         <Avatar>
         <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_737fa88661c6.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Adusia420" secondary={  <Rating
-          size="medium"
+      <ListItemText primary="Adusia"/>
+      <ListItemText primary='12/03/2020' />
+      <ListItemText primary='2.1' />
+
+
+      <ListItemText primary={  <Rating
+            size="small"
           readOnly
           name="feedback"
-          value={4.9}
+          value={2.2}
           precision={0.5}
         />} />
-           <ListItemText primary='Score'  secondary='4.9' />
-      <ListItemText primary='Date'  secondary='12/03/2020' />
     </ListItem>
     <div className={classes.review} >
-        "O BoRzE!!! Ufffielbiam to! btw. Cardano to the moon"
+        "zawiodłam sie"
     </div>
-    <Divider variant="inset" component="li" />
+    
+    <Divider variant="fullWidth" />
   </List>
   </div>
   );

@@ -22,8 +22,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { Button } from '@material-ui/core';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import Reviews from "./Reviews";
-import YouTube from '../YouTube/Youtube';
-
+import YouTube from '../../YouTube/YouTube';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,12 +36,20 @@ const useStyles = makeStyles((theme: Theme) =>
                 padding: 0,
                 width: '100%',
             },
+            [theme.breakpoints.down('sm')]: {
+                '& .MuiBox-root': {
+                    [theme.breakpoints.down('sm')]: {
+                      padding: 0,
+                    },
+                  },
+            },
             [theme.breakpoints.down('xs')]: {
                 width: '100%',
                 margin: 0,
                 padding: 0,
             },
         },
+    
         paper: {
             color: theme.palette.text.secondary,
             border: 'none',
@@ -246,15 +253,15 @@ const hnadleSeeFriends = () => {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="ALL REVIEWS" {...a11yProps(0)} />
-          <Tab label="YOUTUBE PREVIEW" {...a11yProps(1)} />
-          <Tab label="TWITCH PREVIEW" {...a11yProps(2)} />
+          <Tab label="YOUTUBE" {...a11yProps(1)} />
+          <Tab label="TWITCH" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
        <Reviews/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <YouTube/>
+      <YouTube/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         TWITCH
