@@ -5,6 +5,7 @@ import MyGames from "./components/MyGamesLog/MyGamesList";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Footer from './components/Footer/Footer';
 import CardPage from './components/CardPage/CardPage';
+import Registration from './components/Registration/Registation';
 
 const App = () => {
 
@@ -16,7 +17,6 @@ const App = () => {
       },
     }));
 
-
   const classes = useStyles();
 
   return (
@@ -26,6 +26,7 @@ const App = () => {
     <Route exact path='/' component={GameCardList} />
     <Route exact path='/mygames' component={MyGames} />
     <Route path="/game/:path" component={CardPage} />
+    <Route path="/login" component={Registration} />
     <Route path="/" component={GameCardList} />
 </Switch>
 <Footer/>

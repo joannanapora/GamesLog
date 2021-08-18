@@ -23,14 +23,25 @@ const useStyles = makeStyles((theme: Theme) =>
         },
       },
     },
+    gamepageContainer: {
+      padding: '10px 40px',
+      [theme.breakpoints.down('sm')]: {
+        padding: '5px 20px',
+      },
+    }
+    ,
     review: {
-        padding: '0 10%',
+        padding: '0 7%',
         width: '85%',
         fontStyle: 'italic',
-        fontSize: '13px'
+        fontSize: '13px',
+        [theme.breakpoints.down('sm')]: {
+          padding: 0,
+        },
     },
     myreview: {
         backgroundColor: theme.palette.primary.light,
+        padding: '10px'
     },
     listitem: {
       padding: '5px 0',
@@ -42,7 +53,7 @@ const Reviews = () => {
   const classes = useStyles();
 
   return (
-      <div>
+      <div className={classes.gamepageContainer} >
     <List className={classes.root}>
         <h4>
             My Animal Crossing review:
@@ -51,25 +62,26 @@ const Reviews = () => {
     <ListItem className={classes.listitem} >
       <ListItemAvatar>
         <Avatar>
-          <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
+          <img  alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Porczi"/>
-      <ListItemText primary='12/03/2020' />
-      <ListItemText primary='2.1' />
-
-
-      <ListItemText primary={  <Rating
+      <ListItemText primary="Porczi" secondary="12/12/2021"/>
+    </ListItem>
+    <div className={classes.review} >
+       <p>
+         "I love this game!"
+         </p> 
+         Score 4.5
+        <Rating
+        style={{marginLeft: '10px'}}
             size="small"
           readOnly
           name="feedback"
-          value={2.2}
+          value={4.5}
           precision={0.5}
-        />} />
-    </ListItem>
-    <div className={classes.review} >
-        "Ujdzie"
+        />
     </div>
+    <Divider component="li" />
     </div>
     <h4>
             Other Players reviews:
@@ -80,72 +92,23 @@ const Reviews = () => {
           <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_0b9c655083c9.jpg' />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary="Tankusowaty"/>
-      <ListItemText primary='12/03/2020' />
-      <ListItemText primary='2.6' />
-
-
-      <ListItemText primary={  <Rating
+      <ListItemText primary="Tankusowaty" secondary="12/12/2021"/>
+    </ListItem>
+    <div className={classes.review} >
+       <p>
+         "Ujdzie"
+         </p> 
+         Score 3.4
+        <Rating
+        style={{marginLeft: '10px'}}
             size="small"
           readOnly
           name="feedback"
           value={2.6}
           precision={0.5}
-        />} />
-    </ListItem>
-    <div className={classes.review} >
-        "Ujdzie"
-   
+        />
     </div>
-    <Divider variant="inset" component="li" />
-    <ListItem className={classes.listitem} >
-      <ListItemAvatar>
-        <Avatar>
-        <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_737fa88661c6.jpg' />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText primary="Phoenicia4"/>
-      <ListItemText primary='12/03/2020' />
-      <ListItemText primary='1.1' />
-
-
-      <ListItemText primary={  <Rating
-            size="small"
-          readOnly
-          name="feedback"
-          value={1.1}
-          precision={0.5}
-        />} />
-    </ListItem>
-    <div className={classes.review} >
-        "nie zagram w to wiecej nara"
-    </div>
-  
-    <Divider variant="inset" component="li" />
-    <ListItem className={classes.listitem} >
-      <ListItemAvatar>
-        <Avatar>
-        <img alt='avatar' height='100%' width='100%' src='https://samequizy.pl/wp-content/uploads/2019/01/filing_images_737fa88661c6.jpg' />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText primary="Adusia"/>
-      <ListItemText primary='12/03/2020' />
-      <ListItemText primary='2.1' />
-
-
-      <ListItemText primary={  <Rating
-            size="small"
-          readOnly
-          name="feedback"
-          value={2.2}
-          precision={0.5}
-        />} />
-    </ListItem>
-    <div className={classes.review} >
-        "zawiodłam sie"
-    </div>
-    
-    <Divider variant="fullWidth" />
+    <Divider component="li" />
   </List>
   </div>
   );

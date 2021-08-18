@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Rating from '@material-ui/lab/Rating';
 import { Tooltip, Typography } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-import Modal from '../Modal';
+import Modal from '../Modal/Modal';
 import { useTheme } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -87,6 +87,10 @@ const GameCard = ({
     setOpen(false);
   };
 
+  const handleChangeStatus = () => {
+
+  }
+
   const addToGamesLog = (name: string) => {};
 
   return (
@@ -114,7 +118,7 @@ const GameCard = ({
         }
         action={status === 'none' ? 
         <Tooltip title="Change game status" aria-label="add">
-        <IconButton>
+        <IconButton onClick={handleChangeStatus} >
           <LibraryAddIcon /> 
           </IconButton>
           </Tooltip>

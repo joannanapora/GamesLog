@@ -6,27 +6,32 @@ const GLButton = ({onClick, label}:{onClick:any, label:string}) => {
     const useStyles = makeStyles((theme: Theme) =>
     createStyles({
     dark: {
-      background: theme.palette.primary.main,
         borderRadius: '3px',
         fontSize: '16px',
-        width: '100%',
-        maxWidth: '300px',
-        border: 0,
-        height: '48px',
+        width: '200px',
+        fontFamily: 'Monda',
+        height: '50px',
         padding: '0 30px',
         [theme.breakpoints.down('sm')]: {
             marginBottom: '20px',
           },
     },
+    box: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'center'
+    }
 }));
 
 
 const classes = useStyles();
 
 return (
+  <div className={classes.box} >
       <Button onClick={onClick} type="button" className={classes.dark}>
         {label}
       </Button>
+  </div>
     )
 
 }
